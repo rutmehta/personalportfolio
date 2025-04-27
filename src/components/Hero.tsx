@@ -18,23 +18,30 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex-1 space-y-6"
+            className="flex-1"
           >
-            <h2 className="text-lg md:text-xl font-medium text-purple-400">Hi there, I&apos;m</h2>
-            <h1 className="text-4xl md:text-6xl font-bold">
+            <h2 className="text-lg md:text-xl font-medium text-purple-400 mb-6">Hi there, I&apos;m</h2>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">
               <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text">
                 Rut Mehta
               </span>
             </h1>
-            <h3 className="text-2xl md:text-3xl font-semibold text-gray-300">
+            <h3 className="text-2xl md:text-3xl font-semibold text-gray-300 mb-6">
               building for humanity
             </h3>
-            <p className="text-gray-400 text-lg max-w-2xl">
+            <p className="text-gray-400 text-lg max-w-2xl mb-6">
               A Rutgers grad pursuing dual degrees in Computer Science and Business Analytics, 
-              2x founder, and AI developer with experience at T-Mobile, NASA, and beyond. Built in AI, XR, Quantum Computing and other emerging technologies. Passionate about innovating in two key areas: 1) Expanding the boundaries of human intelligence (AI, BCIs, novel computing, education) and 2) Enhancing optimization and efficiency (productivity tools, reducing friction).
+              2x founder, and AI developer with experience at T-Mobile, NASA, and beyond. Built in AI, XR, Quantum Computing and other emerging technologies.
             </p>
+            <p className="text-gray-400 text-lg max-w-2xl mb-0">
+              Passionate about innovating in two key areas:
+            </p>
+            <ul className="text-gray-400 text-lg max-w-2xl list-disc list-outside pl-5 space-y-1 mt-4">
+              <li>Expanding the boundaries of human intelligence (including but not limited to: AI, BCIs, novel computing, education, etc).</li>
+              <li>Enhancing optimization and efficiency (including but not limited to: productivity tools, reducing friction, etc).</li>
+            </ul>
             
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row gap-4 pt-4 mb-6">
               <Link 
                 href="#projects"
                 className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium py-3 px-6 rounded-lg transition-all flex items-center justify-center"

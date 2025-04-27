@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const navItems = [
@@ -19,6 +20,19 @@ const navItems = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  
+  // Check if we're on a page other than the homepage
+  const isNotHomePage = pathname !== '/';
+  
+  // Helper function to get the correct href based on current path
+  const getHref = (item: {name: string, href: string}) => {
+    // If it's an anchor link and we're not on the homepage, prepend with '/'
+    if (item.href.startsWith('#') && isNotHomePage) {
+      return '/' + item.href;
+    }
+    return item.href;
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,7 +64,7 @@ export default function Navbar() {
             {navItems.map((item) => (
               <Link 
                 key={item.name} 
-                href={item.href}
+                href={getHref(item)}
                 className="text-gray-300 hover:text-white transition-colors font-medium"
               >
                 {item.name}
@@ -88,7 +102,7 @@ export default function Navbar() {
             {navItems.map((item) => (
               <Link
                 key={item.name}
-                href={item.href}
+                href={getHref(item)}
                 className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-900/50 rounded-md"
                 onClick={() => setIsOpen(false)}
               >

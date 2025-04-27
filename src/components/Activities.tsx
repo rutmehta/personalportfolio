@@ -58,9 +58,9 @@ export default function Activities() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Activities & Leadership</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Activities & Leadership</h2>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-6"></div>
-          <p className="text-gray-400 max-w-3xl mx-auto">
+          <p className="text-gray-300 max-w-3xl mx-auto">
             Beyond academics and professional work, I&apos;ve actively engaged in leadership roles, competitions, and programs focused on innovation, design, and community impact.
           </p>
         </motion.div>
@@ -78,14 +78,14 @@ export default function Activities() {
               <div className="flex items-center mb-4">
                 <activity.icon className="w-8 h-8 text-purple-400 mr-4 flex-shrink-0" />
                 <div>
-                  <h3 className="text-xl font-semibold">{activity.title}</h3>
+                  <h3 className="text-xl font-semibold text-white">{activity.title}</h3>
                   {activity.role && <p className="text-purple-400 text-sm font-medium">{activity.role}</p>}
                 </div>
               </div>
-              <p className="text-gray-400 text-sm mb-4 flex-grow">{activity.description}</p>
+              <p className="text-gray-300 text-sm mb-4 flex-grow">{activity.description}</p>
               <div className="flex flex-wrap gap-2 mt-auto pt-4 border-t border-gray-800/50">
                 {activity.tags.map((tag, tagIndex) => (
-                  <span key={tagIndex} className="bg-gray-800 text-gray-400 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                  <span key={tagIndex} className="bg-gray-800 text-gray-300 text-xs font-medium px-2.5 py-0.5 rounded-full">
                     {tag}
                   </span>
                 ))}

@@ -58,38 +58,6 @@ const experiences = [
     description: 'Assisting CS students with data structures concepts, algorithm design, and Java programming assignments.',
     technologies: ['Java', 'Data Structures', 'Teaching'],
     logo: '📚'
-  },
-  {
-    company: 'The MARK Conference',
-    position: 'Conference Intern',
-    period: 'Mar 2024',
-    description: 'Supported event planning and execution for the annual Rutgers leadership conference, coordinating speaker logistics and attendee engagement.',
-    technologies: ['Event Planning', 'Coordination', 'Leadership'],
-    logo: '📣'
-  },
-  {
-    company: 'Steelcase',
-    position: 'Social Innovation Fellow',
-    period: 'Sep 2024 – Present',
-    description: 'Selected as a Steelcase Social Innovation Fellow, collaborating on design projects to foster social impact.',
-    technologies: ['Design Thinking', 'Social Innovation', 'Collaboration'],
-    logo: '🤝'
-  },
-  {
-    company: 'Design For America',
-    position: 'Chapter Lead - Rutgers',
-    period: 'Jan 2022 – Dec 2023',
-    description: 'Led the Rutgers chapter of Design For America, mentoring student teams to develop solutions addressing community challenges.',
-    technologies: ['Leadership', 'Design Thinking', 'Strategy'],
-    logo: '💡'
-  },
-  {
-    company: 'NSF I-Corps',
-    position: 'I-Corps Fellow',
-    period: 'Oct 2021 – Present',
-    description: 'Participated as a National Science Foundation I-Corps Fellow, validating the market potential of technology solutions through customer discovery.',
-    technologies: ['Research', 'Customer Discovery', 'Entrepreneurship'],
-    logo: '🧪'
   }
 ];
 
