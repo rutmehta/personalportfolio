@@ -55,7 +55,7 @@ export default function Contact() {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Get In Touch</h2>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-6"></div>
           <p className="text-gray-400 max-w-2xl mx-auto">
-            Have a project idea or interested in collaboration? I'd love to hear from you! Feel free to reach out 
+            Have a project idea or interested in collaboration? I&apos;d love to hear from you! Feel free to reach out 
             through the form below or connect with me on social media.
           </p>
         </motion.div>
@@ -71,8 +71,8 @@ export default function Contact() {
             <div>
               <h3 className="text-xl font-semibold text-white mb-4">Contact Information</h3>
               <p className="text-gray-300 mb-6">
-                I'm currently available for freelance work, full-time positions, and collaborative projects. 
-                Don't hesitate to reach out!
+                I&apos;m currently available for freelance work, full-time positions, and collaborative projects. 
+                Don&apos;t hesitate to reach out!
               </p>
               
               <div className="space-y-4">
@@ -82,8 +82,19 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="text-sm font-medium text-gray-400">Email</h4>
-                    <a href="mailto:rut.mehta@example.com" className="text-white hover:text-purple-400 transition-colors">
-                      rut.mehta@example.com
+                    <a href="mailto:rut.mehta@rutgers.edu" className="text-white hover:text-purple-400 transition-colors">
+                      rut.mehta@rutgers.edu
+                    </a>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400">
+                    <span className="text-xl">📞</span>
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-medium text-gray-400">Phone</h4>
+                    <a href="tel:+16093754258" className="text-white hover:text-purple-400 transition-colors">
+                      (609) 375-4258
                     </a>
                   </div>
                 </div>
@@ -94,7 +105,7 @@ export default function Contact() {
               <h3 className="text-xl font-semibold text-white mb-4">Follow Me</h3>
               <div className="flex gap-4">
                 <a 
-                  href="#" 
+                  href="https://linkedin.com/in/rutm" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-purple-500/20 hover:text-purple-400 transition-all"
@@ -102,7 +113,7 @@ export default function Contact() {
                   <FiLinkedin className="text-xl" />
                 </a>
                 <a 
-                  href="#" 
+                  href="https://github.com/rutmehta" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-purple-500/20 hover:text-purple-400 transition-all"
@@ -123,7 +134,7 @@ export default function Contact() {
             <div className="p-6 rounded-xl bg-gradient-to-r from-purple-900/30 to-blue-900/30 border border-purple-800/30">
               <h3 className="text-lg font-semibold text-white mb-3">Want to work together?</h3>
               <p className="text-gray-300 mb-4">
-                I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+                I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
               </p>
               <a 
                 href="#" 
@@ -203,7 +214,7 @@ export default function Contact() {
                   value={formData.message}
                   onChange={handleChange}
                   className="w-full px-4 py-3 rounded-lg bg-gray-800/50 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent transition-all resize-none"
-                  placeholder="I'd like to discuss a potential project..."
+                  placeholder="I&apos;d like to discuss a potential project..."
                 />
               </div>
               
@@ -226,7 +237,7 @@ export default function Contact() {
                     animate={{ opacity: 1, y: 0 }}
                     className="mt-4 text-center text-green-400"
                   >
-                    Your message has been sent successfully! I'll get back to you soon.
+                    Your message has been sent successfully! I&apos;ll get back to you soon.
                   </motion.p>
                 )}
               </div>

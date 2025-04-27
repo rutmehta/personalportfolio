@@ -4,28 +4,20 @@ import { FiExternalLink } from 'react-icons/fi';
 
 const researchPapers = [
   {
-    title: 'Novel Machine Learning Approaches for Energy-Efficient Edge Computing',
-    journal: 'IEEE Transactions on Computer Systems',
-    date: 'October 2022',
-    description: 'Proposed innovative algorithms for optimizing energy consumption in edge computing devices while maintaining high performance. The research demonstrated 40% energy savings without significant performance degradation.',
-    link: '#',
-    tags: ['Edge Computing', 'Machine Learning', 'Energy Optimization']
+    title: 'SDIM: A Qudit Stabilizer Simulator',
+    journal: 'PLanQC 2025 & ASPLOS 2026',
+    date: '2025',
+    description: 'Presented SDIM, a stabilizer circuit simulator for qudits, at PLanQC 2025 and submitted to ASPLOS 2026. Explore the simulator and code.',
+    link: 'https://popl25.sigplan.org/details/planqc-2025-papers/17/Sdim-A-Qudit-Stabilizer-Simulator',
+    tags: ['Quantum Computing', 'Qudits', 'Simulator']
   },
   {
-    title: 'Improving Natural Language Understanding through Transformer Architecture Modifications',
-    journal: 'ACM Conference on Natural Language Processing',
-    date: 'May 2022',
-    description: 'Introduced structural modifications to transformer models that enhance contextual understanding in NLP tasks. Our approach achieved state-of-the-art performance on multiple benchmark datasets.',
-    link: '#',
-    tags: ['NLP', 'Transformers', 'Deep Learning']
-  },
-  {
-    title: 'Blockchain-Based Solutions for Secure Medical Data Sharing',
-    journal: 'Journal of Medical Informatics',
-    date: 'January 2023',
-    description: 'Developed a secure, privacy-preserving framework for medical data sharing using blockchain technology. The solution enables controlled access to sensitive patient data while maintaining HIPAA compliance.',
-    link: '#',
-    tags: ['Blockchain', 'Healthcare', 'Data Privacy']
+    title: 'Literature Review: XR, Experiential & Multimedia Learning',
+    journal: 'Aresty Rutgers Undergraduate Research Journal',
+    date: '2024',
+    description: 'Comprehensive literature review on the intersection of Extended Reality, Experiential Learning, and Multimedia Learning.',
+    link: 'https://arestyrurj.libraries.rutgers.edu/index.php/arestyrurj/article/view/239',
+    tags: ['XR', 'Experiential Learning', 'Multimedia']
   }
 ];
 
@@ -104,7 +96,7 @@ export default function Research() {
             <div>
               <h3 className="text-xl font-semibold text-white mb-2">Interested in Research Collaboration?</h3>
               <p className="text-gray-300">
-                I'm always open to collaborating on innovative research projects at the intersection 
+                I&apos;m always open to collaborating on innovative research projects at the intersection 
                 of technology and real-world applications.
               </p>
             </div>

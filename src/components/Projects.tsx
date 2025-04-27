@@ -1,52 +1,75 @@
 'use client';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import Image from 'next/image';
-import { FiExternalLink, FiGithub } from 'react-icons/fi';
+import { FiExternalLink, FiGithub, FiGlobe } from 'react-icons/fi';
 
 const projects = [
   {
-    title: 'AI-Powered Health Assistant',
-    description: 'A machine learning application that uses computer vision and NLP to detect early signs of health conditions from various inputs. Deployed as a web and mobile application with cross-platform functionality.',
-    image: '/images/project-health.jpg',
+    title: 'Graphene',
+    description: 'Architected browser-based AI agent framework using TypeScript/Python and Browser-Use to build a Large Action Model. Implementing Retrieval Augmented Generation on your browser session through Qdrant and OpenAI.',
+    image: '/images/project-ai.jpg',
     placeholder: 'bg-gradient-to-br from-blue-500/70 to-purple-500/70',
-    tags: ['React Native', 'TensorFlow', 'Python', 'AWS'],
+    tags: ['TypeScript', 'Python', 'AI', 'Browser-Use', 'RAG', 'Qdrant', 'OpenAI'],
     links: {
       demo: '#',
-      github: '#',
+      github: 'https://www.github.com/rutmehta',
     },
     featured: true
   },
   {
-    title: 'Blockchain Supply Chain Platform',
-    description: 'Developed a transparent supply chain tracking system using blockchain technology. Enables real-time monitoring and verification of product journeys from manufacturer to consumer.',
-    image: '/images/project-blockchain.jpg',
+    title: 'SageTech',
+    description: 'Architected Unity-based experiential learning platform; leveraged C++ and C# for performance-critical modules. Developed Python-based ML models trained on XR headset and eye-tracking data achieving ≥ 95% accuracy in predicting student engagement and retention. Created text-to-3D generative AI system using Transformer architectures reducing asset creation time by ≥ 70%.',
+    image: '/images/project-sagetech.jpg',
     placeholder: 'bg-gradient-to-br from-purple-500/70 to-pink-500/70',
-    tags: ['Solidity', 'React', 'Node.js', 'Ethereum'],
+    tags: ['Unity', 'C++', 'C#', 'Python', 'ML', 'XR', 'Generative AI'],
     links: {
       demo: '#',
-      github: '#',
+      website: 'https://www.sagetech.info',
     },
     featured: true
   },
   {
-    title: 'EdTech Learning Platform',
-    description: 'A comprehensive online learning platform with interactive courses, real-time collaboration tools, and AI-driven personalized learning paths. Utilized by over 2,000 students.',
-    image: '/images/project-edtech.jpg',
+    title: 'AGI House x SCSP AI Defense Hackathon Winner',
+    description: 'Winner of the AGI House x SCSP AI Defense Hackathon ($25,000) – built a drone sentry using Computer Vision, LangChain, Llama, and Modal.',
+    image: '/images/project-drone.jpg',
     placeholder: 'bg-gradient-to-br from-green-500/70 to-blue-500/70',
-    tags: ['Next.js', 'MongoDB', 'Socket.IO', 'Docker'],
+    tags: ['Computer Vision', 'LangChain', 'Llama', 'Modal', 'Drone'],
     links: {
-      demo: '#',
-      github: '#',
+      demo: 'https://www.linkedin.com/posts/rutm_%F0%9D%96%AB%F0%9D%97%82%F0%9D%96%BF%F0%9D%96%BE-%F0%9D%97%8E%F0%9D%97%89%F0%9D%96%BD%F0%9D%96%BA%F0%9D%97%8D%F0%9D%96%BE-%F0%9D%96%BA%F0%9D%97%80%F0%9D%96%BA%F0%9D%97%82%F0%9D%97%87-%F0%9D%96%B3%F0%9D%97%81%F0%9D%97%82%F0%9D%97%8C-activity-7313534496790761473-_79e',
+      github: 'https://github.com/DivyamJindal/sentry',
     },
     featured: true
   },
   {
-    title: 'Smart City IoT Dashboard',
-    description: 'An IoT analytics dashboard that visualizes and manages data from thousands of connected devices across urban environments. Provides real-time insights for city planning and resource management.',
-    image: '/images/project-iot.jpg',
+    title: 'Job Hunt Game - GenAI',
+    description: 'An interactive platformer game for CS students featuring AI-powered interview simulations. Built with Phaser 3, it includes coding challenges, computer science problems, and skill progression systems that unlock abilities as players advance through their career journey.',
+    image: '/images/project-jobhunt.jpg',
+    placeholder: 'bg-gradient-to-br from-blue-400/70 to-cyan-500/70',
+    tags: ['JavaScript', 'Crew.AI', 'Phaser 3', 'GenAI', 'Game Development', 'Educational'],
+    links: {
+      demo: '#',
+      github: 'https://github.com/AdmiralX7/UnemploymentStudios',
+    },
+    featured: true
+  },
+  {
+    title: 'Mangrove Browser & Extension',
+    description: 'Developed a custom browser and extension for enhanced web browsing with privacy-focused features. The browser provides a streamlined interface while the extension adds functionality for improved user experience.',
+    image: '/images/project-mangrove.jpg',
+    placeholder: 'bg-gradient-to-br from-green-400/70 to-emerald-600/70',
+    tags: ['JavaScript', 'Browser Extension', 'Web Development', 'Privacy'],
+    links: {
+      github: 'https://github.com/rutmehta/MangroveBrowser',
+      website: 'https://github.com/rutmehta/MangroveExtension',
+    },
+    featured: false
+  },
+  {
+    title: 'J&J & AWS Black Tech Health Hackathon',
+    description: 'Top 5 Finish in the J&J & AWS Black Tech Health Hackathon. Built AWS SageMaker pipeline achieving ≥93% F1-score.',
+    image: '/images/project-health.jpg',
     placeholder: 'bg-gradient-to-br from-yellow-500/70 to-red-500/70',
-    tags: ['Vue.js', 'Python', 'InfluxDB', 'MQTT'],
+    tags: ['AWS', 'SageMaker', 'ML Pipeline', 'Healthcare'],
     links: {
       demo: '#',
       github: '#',
@@ -54,27 +77,56 @@ const projects = [
     featured: false
   },
   {
-    title: 'Augmented Reality Navigation',
-    description: 'Mobile AR application that overlays navigation information in real-time for enhanced urban exploration. Features landmark recognition and historical information integration.',
-    image: '/images/project-ar.jpg',
+    title: 'GMaps × Rutgers',
+    description: 'Custom integration of Google Maps API with Rutgers University data to create interactive campus navigation and information system.',
+    image: '/images/project-gmaps.jpg',
+    placeholder: 'bg-gradient-to-br from-red-500/70 to-amber-500/70',
+    tags: ['Google Maps API', 'Jupyter Notebook', 'Data Analysis', 'Geospatial'],
+    links: {
+      github: 'https://github.com/rutmehta/GMapsxRutgers',
+    },
+    featured: false
+  },
+  {
+    title: 'Auto Job',
+    description: 'Automated job application tool that streamlines the job search process, saving time and increasing efficiency for job seekers.',
+    image: '/images/project-autojob.jpg',
+    placeholder: 'bg-gradient-to-br from-purple-400/70 to-blue-500/70',
+    tags: ['Automation', 'Python', 'Web Scraping', 'Job Search'],
+    links: {
+      github: 'https://github.com/rutmehta/auto_job',
+    },
+    featured: false
+  },
+  {
+    title: 'FoodStash App',
+    description: 'An application that tracks household food inventory to reduce waste and improve meal planning. Helps users manage their grocery shopping and food consumption more efficiently.',
+    image: '/images/project-foodstash.jpg',
+    placeholder: 'bg-gradient-to-br from-green-500/70 to-yellow-400/70',
+    tags: ['Mobile App', 'Food Tracking', 'Inventory Management'],
+    links: {
+      github: 'https://github.com/rutmehta/FoodStashApp',
+    },
+    featured: false
+  },
+  {
+    title: 'EnviroCycle',
+    description: 'Environmental sustainability project focused on recycling and waste management through technology innovation.',
+    image: '/images/project-envirocycle.jpg',
+    placeholder: 'bg-gradient-to-br from-green-600/70 to-blue-400/70',
+    tags: ['Environment', 'Sustainability', 'Recycling'],
+    links: {
+      github: 'https://github.com/rutmehta/EnviroCycle',
+    },
+    featured: false
+  },
+  {
+    title: 'AI Consulting for Fortune 50 TMT Client',
+    description: 'Analyzed AI compute hardware (GPUs, TPUs, ASICs, FPGAs, etc) and memory (HBM3E) for Fortune 50 TMT client. Researched AI tooling layers (foundational data, orchestration frameworks); pitched Coreweave, Sambanova Systems, etc. Advised on build vs. buy decisions or partner strategies for emerging technologies.',
+    image: '/images/project-consulting.jpg',
     placeholder: 'bg-gradient-to-br from-red-500/70 to-purple-500/70',
-    tags: ['Unity', 'ARCore', 'C#', 'Firebase'],
-    links: {
-      demo: '#',
-      github: '#',
-    },
-    featured: false
-  },
-  {
-    title: 'Financial Analytics Tool',
-    description: 'A comprehensive financial analytics platform that uses machine learning to predict market trends and provide investment insights. Features customizable dashboards and alerts.',
-    image: '/images/project-finance.jpg',
-    placeholder: 'bg-gradient-to-br from-blue-500/70 to-cyan-500/70',
-    tags: ['Python', 'React', 'PostgreSQL', 'TensorFlow'],
-    links: {
-      demo: '#',
-      github: '#',
-    },
+    tags: ['AI Hardware', 'Consulting', 'GPU', 'TPU', 'ASIC', 'FPGA'],
+    links: {},
     featured: false
   }
 ];
@@ -185,22 +237,38 @@ export default function Projects() {
                 </div>
                 
                 <div className="flex gap-4">
-                  <a 
-                    href={project.links.demo} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-sm text-purple-400 hover:text-purple-300 transition-colors"
-                  >
-                    <FiExternalLink className="text-lg" /> Demo
-                  </a>
-                  <a 
-                    href={project.links.github} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-sm text-purple-400 hover:text-purple-300 transition-colors"
-                  >
-                    <FiGithub className="text-lg" /> Code
-                  </a>
+                  {project.links.demo && (
+                    <a 
+                      href={project.links.demo} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 text-sm text-purple-400 hover:text-purple-300 transition-colors"
+                    >
+                      <FiExternalLink className="text-lg" /> Demo
+                    </a>
+                  )}
+                  
+                  {project.links.github && (
+                    <a 
+                      href={project.links.github} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 text-sm text-purple-400 hover:text-purple-300 transition-colors"
+                    >
+                      <FiGithub className="text-lg" /> Code
+                    </a>
+                  )}
+                  
+                  {project.links.website && (
+                    <a 
+                      href={project.links.website} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 text-sm text-purple-400 hover:text-purple-300 transition-colors"
+                    >
+                      <FiGlobe className="text-lg" /> Website
+                    </a>
+                  )}
                 </div>
               </div>
             </motion.div>

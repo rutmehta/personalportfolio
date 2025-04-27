@@ -4,36 +4,92 @@ import { useState } from 'react';
 
 const experiences = [
   {
-    company: 'NASA',
+    company: 'New Jersey Big Data Alliance (NJBDA)',
     position: 'Software Engineering Intern',
-    period: 'Summer 2022',
-    description: 'Developed machine learning algorithms for satellite image processing, improving data analysis efficiency by 30%. Collaborated with a cross-functional team of engineers and scientists on mission-critical projects.',
-    technologies: ['Python', 'TensorFlow', 'Computer Vision', 'AWS'],
-    logo: '🚀'
+    period: 'Jan 2025 – Present',
+    description: 'Developed automated pipeline analyzing NJ transfer course equivalency matrices, identifying 23% more non-transferable data science courses through pattern recognition algorithms. Engineered document processing system using NLP to parse 1,200+ syllabi, generating vector embeddings with Sentence-BERT for cross-institutional comparison. Implemented cosine similarity metrics (scipy.spatial) achieving 89% accuracy in matching syllabi content between 2-year and 4-year programs. Designed novel curriculum merge protocol using mergekit SLERP interpolation, combining top-matched syllabi into unified course structures.',
+    technologies: ['Python', 'NLP', 'Sentence-BERT', 'Pattern Recognition', 'Vector Embeddings', 'SLERP Interpolation'],
+    logo: '📊'
   },
   {
     company: 'T-Mobile',
-    position: 'Technology Innovation Intern',
-    period: 'Summer 2021',
-    description: 'Designed and implemented a customer insight dashboard using React and Node.js, providing real-time analytics to business stakeholders. Optimized backend services, reducing API response times by 40%.',
-    technologies: ['React', 'Node.js', 'GraphQL', 'Docker'],
+    position: 'AI Hardware/Software Intern',
+    period: 'May 2024 – Aug 2024',
+    description: 'Coordinate 7 cross-functional teams across T-Mobile to design and execute a large-scale market trial. Evaluate the selection of AI, Software, Hardware, and chipset partners to integrate on the HW/SW stack. Inform senior leadership of new advancements in AI hardware and consumer AI products weekly.',
+    technologies: ['AI', 'Hardware/Software Integration', 'Market Trial Design', 'Cross-functional Leadership'],
     logo: '📱'
   },
   {
-    company: 'Tech Startup (Founder)',
-    position: 'Co-founder & CTO',
-    period: '2020 - Present',
-    description: 'Founded and led development of a SaaS platform serving over 5,000 users. Built and managed a team of 5 engineers, implementing agile methodologies. Secured $500K in seed funding through competitive pitch competitions.',
-    technologies: ['Full-Stack Development', 'AWS', 'Product Management', 'UI/UX'],
+    company: 'Rutgers Learning Centers',
+    position: 'Head Learning Assistant for MIS',
+    period: 'Sep 2023 – Sept 2024',
+    description: 'Assisting classes of 40 in learning the fundamentals and advanced concepts of Excel, Tableau, and SQL.',
+    technologies: ['Excel', 'Tableau', 'SQL', 'Teaching', 'Management Information Systems'],
+    logo: '👨‍🏫'
+  },
+  {
+    company: 'NASA',
+    position: 'Service Design Intern',
+    period: 'Jan 2023 – May 2023',
+    description: 'Analyzed, coded, and synthesized 100+ hours of interviews, 26000+ tags across the customer experience. Identified customer needs, pain points, themes, patterns, personas, etc to motivate applicant behavior. Created and presented large-scale recommendations for NASA Admin to redesign the SBIR/STTR process.',
+    technologies: ['Data Analysis', 'User Research', 'Service Design', 'Customer Experience'],
+    logo: '🚀'
+  },
+  {
+    company: 'Rutgers University OIT',
+    position: 'Level 2 Consultant',
+    period: 'Aug 2021 – Present',
+    description: 'Manage 3+ computing labs and libraries across campuses, providing customer service to 100,000+ students, staff, faculty, alumni. Working with IdM tools, ticketing tools, and large-scale troubleshooting tools to maintain the technology infrastructure of Rutgers. Mentor and guide Level 1 Consultants and Consultants in Training, creating training manuals and how-to articles.',
+    technologies: ['IdM Tools', 'Technical Support', 'Customer Service', 'Mentoring', 'Documentation'],
+    logo: '💻'
+  },
+  {
+    company: 'SageTech',
+    position: 'Founder/Developer',
+    period: 'Oct 2021 - Present',
+    description: 'Building an experiential learning platform powered by AI and Extended Reality (XR) technology. Tackling lower student engagement and knowledge retention in high school students. Creating an intuitive text-to-3D prototyping tool – MetaWeaver – to lower the barrier of entry to VR and AR creation. Providing real-time student performance and learning insights powered by AI trained on headset and eye-tracking data. Backed by the National Science Foundation I-Corps, Rutgers, NJIT, Baylor New Venture, Propelify/TechUnited, etc.',
+    technologies: ['AI', 'XR Technology', 'MetaWeaver', 'Text-to-3D', 'Performance Analytics'],
     logo: '💡'
   },
   {
-    company: 'Research Lab',
-    position: 'Undergraduate Researcher',
-    period: '2019 - 2023',
-    description: 'Conducted research in applied machine learning, resulting in 2 published papers. Developed novel algorithms for natural language processing tasks, achieving state-of-the-art results on benchmark datasets.',
-    technologies: ['NLP', 'Machine Learning', 'PyTorch', 'Data Analysis'],
-    logo: '🔬'
+    company: 'Rutgers University CS Department',
+    position: 'Learning Assistant - Data Structures',
+    period: 'Feb 2025 – Present',
+    description: 'Assisting CS students with data structures concepts, algorithm design, and Java programming assignments.',
+    technologies: ['Java', 'Data Structures', 'Teaching'],
+    logo: '📚'
+  },
+  {
+    company: 'The MARK Conference',
+    position: 'Conference Intern',
+    period: 'Mar 2024',
+    description: 'Supported event planning and execution for the annual Rutgers leadership conference, coordinating speaker logistics and attendee engagement.',
+    technologies: ['Event Planning', 'Coordination', 'Leadership'],
+    logo: '📣'
+  },
+  {
+    company: 'Steelcase',
+    position: 'Social Innovation Fellow',
+    period: 'Sep 2024 – Present',
+    description: 'Selected as a Steelcase Social Innovation Fellow, collaborating on design projects to foster social impact.',
+    technologies: ['Design Thinking', 'Social Innovation', 'Collaboration'],
+    logo: '🤝'
+  },
+  {
+    company: 'Design For America',
+    position: 'Chapter Lead - Rutgers',
+    period: 'Jan 2022 – Dec 2023',
+    description: 'Led the Rutgers chapter of Design For America, mentoring student teams to develop solutions addressing community challenges.',
+    technologies: ['Leadership', 'Design Thinking', 'Strategy'],
+    logo: '💡'
+  },
+  {
+    company: 'NSF I-Corps',
+    position: 'I-Corps Fellow',
+    period: 'Oct 2021 – Present',
+    description: 'Participated as a National Science Foundation I-Corps Fellow, validating the market potential of technology solutions through customer discovery.',
+    technologies: ['Research', 'Customer Discovery', 'Entrepreneurship'],
+    logo: '🧪'
   }
 ];
 

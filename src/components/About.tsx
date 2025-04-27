@@ -4,10 +4,9 @@ import { BsCodeSlash, BsLightbulb, BsPeople } from 'react-icons/bs';
 import { FaGraduationCap } from 'react-icons/fa';
 
 const skills = [
-  'JavaScript', 'TypeScript', 'React', 'Next.js', 
-  'Node.js', 'Python', 'Machine Learning', 'Data Science',
-  'AWS', 'Docker', 'Kubernetes', 'GraphQL',
-  'MongoDB', 'PostgreSQL', 'Firebase', 'TensorFlow'
+  'Python', 'Java', 'C++', 'C#', 'JavaScript', 'TypeScript', 'Rust', 'SQL', 
+  'NextJS', 'React', 'Express', 'NodeJS', 'AWS', 'Docker', 'Kubernetes',
+  'spaCy', 'NLTK', 'Pandas', 'NumPy', 'PyTorch', 'TensorFlow'
 ];
 
 export default function About() {
@@ -34,19 +33,19 @@ export default function About() {
             className="space-y-6"
           >
             <p className="text-lg text-gray-300">
-              I'm a tech enthusiast and recent graduate from Rutgers University with a passion for building 
+              I&apos;m a tech enthusiast and current student at Rutgers University with a passion for building 
               innovative solutions that make a difference. As a 2x founder, I thrive in environments where 
               creativity meets technical challenge.
             </p>
             <p className="text-lg text-gray-300">
-              With experience from internships at T-Mobile, NASA, and other leading organizations, I've developed 
-              a diverse skill set across software development, data science, and product management. My research 
-              work has been published in peer-reviewed journals, focusing on the intersection of technology and real-world applications.
+              With experience from positions at T-Mobile, NASA, NJBDA, and Rutgers OIT, I&apos;ve developed 
+              a diverse skill set across software development, data science, and AI. My projects span from 
+              AI-powered applications to experiential learning platforms using Unity.
             </p>
             <p className="text-lg text-gray-300">
-              I'm constantly exploring new technologies and methodologies to push the boundaries of what's possible. 
-              When I'm not coding or brainstorming new startup ideas, you can find me mentoring aspiring developers 
-              or contributing to open-source projects.
+              I&apos;m constantly exploring new technologies and methodologies to push the boundaries of what&apos;s possible. 
+              Outside of my professional endeavors, I serve as a Data Structures Learning Assistant, helping fellow 
+              students master core Java concepts and fundamental data structures.
             </p>
 
             <div className="grid grid-cols-2 gap-4 mt-6">
@@ -100,20 +99,27 @@ export default function About() {
             <div className="space-y-4">
               <h3 className="text-xl font-semibold mb-4 text-gray-100">Education</h3>
               <div className="p-4 rounded-lg border border-gray-700 bg-gray-800/30">
-                <h4 className="font-medium text-white">Rutgers University</h4>
-                <p className="text-purple-400">Bachelor of Science in Computer Science</p>
-                <p className="text-sm text-gray-400">2019 - 2023</p>
+                <h4 className="font-medium text-white">Rutgers University – New Brunswick</h4>
+                <p className="text-purple-400">Bachelor of Science in Computer Science, Business Analytics and Information Technology</p>
+                <p className="text-sm text-gray-400">SAS Honors Program, CS Honors | May 2025</p>
                 <p className="text-sm text-gray-300 mt-2">
-                  Graduated with honors. Specialized in Artificial Intelligence and Data Science.
+                  GPA: 3.77 | Minor: Mathematics
+                </p>
+                <p className="text-sm text-gray-300 mt-2">
+                  Coursework: GenAI for Vis Computing, Machine Learning I, Data Structures, Intro to AI, Intro to Deep Learning, Algorithms, MIS
                 </p>
               </div>
               
               <div className="p-4 rounded-lg border border-gray-700 bg-gray-800/30">
-                <h4 className="font-medium text-white">Additional Certifications</h4>
+                <h4 className="font-medium text-white">Honors & Awards</h4>
                 <ul className="text-sm text-gray-300 list-disc pl-5 mt-2 space-y-1">
-                  <li>AWS Certified Solutions Architect</li>
-                  <li>Google Cloud Professional Data Engineer</li>
-                  <li>TensorFlow Developer Certificate</li>
+                  <li>Dean&apos;s List, Rutgers University, Fall 2021 – Present</li>
+                  <li>School of Arts and Sciences Honors Program, Fall 2021 – Present</li>
+                  <li>Scarlet Knight Scholarship, Fall 2021 – Present</li>
+                  <li>AGI House x SCSP AI Defense Hackathon Winner ($25,000)</li>
+                  <li>J&J & AWS Black Tech Health Hackathon - Top 5 Finish</li>
+                  <li>Steelcase Social Innovation Fellowship Recipient ($5K)</li>
+                  <li>Rutgers University Undergraduate Student Innovation Award 2024-2025</li>
                 </ul>
               </div>
             </div>

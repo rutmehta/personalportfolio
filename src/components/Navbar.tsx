@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const navItems = [
@@ -10,6 +11,8 @@ const navItems = [
   { name: 'Experience', href: '#experience' },
   { name: 'Projects', href: '#projects' },
   { name: 'Research', href: '#research' },
+  { name: 'Activities', href: '#activities' },
+  { name: 'Courses', href: '/courses' },
   { name: 'Contact', href: '#contact' },
 ];
 
@@ -31,8 +34,14 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4 md:py-6">
           <div className="flex items-center">
-            <Link href="#home" className="text-2xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text">
-              RM
+            <Link href="#home">
+              <Image
+                src={encodeURI('/images/B&W headshot.jpg')}
+                alt="Rut Mehta Headshot"
+                width={40}
+                height={40}
+                className="rounded-full"
+              />
             </Link>
           </div>
           

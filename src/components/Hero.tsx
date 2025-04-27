@@ -1,7 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Hero() {
   return (
@@ -20,19 +20,18 @@ export default function Hero() {
             transition={{ duration: 0.5 }}
             className="flex-1 space-y-6"
           >
-            <h2 className="text-lg md:text-xl font-medium text-purple-400">Hi there, I'm</h2>
+            <h2 className="text-lg md:text-xl font-medium text-purple-400">Hi there, I&apos;m</h2>
             <h1 className="text-4xl md:text-6xl font-bold">
               <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text">
                 Rut Mehta
               </span>
             </h1>
             <h3 className="text-2xl md:text-3xl font-semibold text-gray-300">
-              Tech Innovator & Entrepreneur
+              building for humanity
             </h3>
             <p className="text-gray-400 text-lg max-w-2xl">
-              A passionate Rutgers graduate, 2x founder, and researcher with a knack for building 
-              innovative solutions. Experienced in developing cutting-edge technology at NASA, T-Mobile, 
-              and beyond.
+              A Rutgers grad pursuing dual degrees in Computer Science and Business Analytics, 
+              2x founder, and AI developer with experience at T-Mobile, NASA, and beyond. Built in AI, XR, Quantum Computing and other emerging technologies. Passionate about innovating in two key areas: 1) Expanding the boundaries of human intelligence (AI, BCIs, novel computing, education) and 2) Enhancing optimization and efficiency (productivity tools, reducing friction).
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
@@ -59,16 +58,12 @@ export default function Hero() {
           >
             <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-purple-500/50">
               {/* Replace with your image */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center text-white text-4xl font-bold">
-                RM
-              </div>
-              {/* Uncomment when you have an image */}
-              {/* <Image 
-                src="/images/profile.jpg" 
-                alt="Rut Mehta" 
-                fill 
+              <Image
+                src="/images/me.png"
+                alt="Rut Mehta"
+                fill
                 className="object-cover"
-              /> */}
+              />
             </div>
           </motion.div>
         </div>
