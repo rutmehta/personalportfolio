@@ -1,101 +1,169 @@
 'use client';
-import { motion } from 'framer-motion';
+import { useEffect, useState, useRef } from 'react';
+import dynamic from 'next/dynamic';
+import { useTextScrambleOnMount } from '@/hooks/useTextScramble';
 import Link from 'next/link';
-import Image from 'next/image';
+
+const ParticleBackground = dynamic(() => import('./ParticleBackground'), { ssr: false });
 
 export default function Hero() {
+  const [mounted, setMounted] = useState(false);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animationRef = useRef<number | null>(null);
+
+  const { displayText: nameText } = useTextScrambleOnMount('Rut Mehta', {
+    delay: 300,
+    speed: 40,
+    scramble: 8,
+  });
+
+  const { displayText: taglineText } = useTextScrambleOnMount('building for humanity', {
+    delay: 800,
+    speed: 30,
+    scramble: 6,
+  });
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // ASCII wave animation
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const chars = ' .:-=+*#%@';
+    const fontSize = 12;
+    let cols: number;
+    let rows: number;
+
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      cols = Math.floor(canvas.width / (fontSize * 0.6));
+      rows = Math.floor(canvas.height / fontSize);
+    };
+
+    resize();
+    window.addEventListener('resize', resize);
+
+    let time = 0;
+
+    const render = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.font = `${fontSize}px "JetBrains Mono", monospace`;
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.06)';
+
+      for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < cols; x++) {
+          const wave1 = Math.sin(x * 0.05 + time * 0.02) * Math.cos(y * 0.03 + time * 0.01);
+          const wave2 = Math.sin((x + y) * 0.02 + time * 0.015);
+          const combined = (wave1 + wave2 + 2) / 4;
+
+          const charIndex = Math.floor(combined * (chars.length - 1));
+          const char = chars[Math.min(Math.max(charIndex, 0), chars.length - 1)];
+
+          ctx.fillText(char, x * fontSize * 0.6, y * fontSize);
+        }
+      }
+
+      time++;
+      animationRef.current = requestAnimationFrame(render);
+    };
+
+    render();
+
+    return () => {
+      window.removeEventListener('resize', resize);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <section id="home" className="min-h-screen flex items-center relative overflow-hidden pt-16">
-      {/* Background elements */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-500/20 rounded-full filter blur-3xl"></div>
-        <div className="absolute bottom-1/3 right-1/3 w-96 h-96 bg-purple-500/20 rounded-full filter blur-3xl"></div>
-      </div>
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-12 md:py-24">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-12">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex-1"
-          >
-            <h2 className="text-lg md:text-xl font-medium text-purple-400 mb-6">Hi there, I&apos;m</h2>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text">
-                Rut Mehta
-              </span>
-            </h1>
-            <h3 className="text-2xl md:text-3xl font-semibold text-gray-300 mb-6">
-              building for humanity
-            </h3>
-            <p className="text-gray-400 text-lg max-w-2xl mb-6">
-              A Rutgers grad pursuing dual degrees in Computer Science and Business Analytics, 
-              2x founder, and AI developer with experience at T-Mobile, NASA, and beyond. Built in AI, XR, Quantum Computing and other emerging technologies.
-            </p>
-            <p className="text-gray-400 text-lg max-w-2xl mb-0">
-              Passionate about innovating in two key areas:
-            </p>
-            <ul className="text-gray-400 text-lg max-w-2xl list-disc list-outside pl-5 space-y-1 mt-4">
-              <li>Expanding the boundaries of human intelligence (including but not limited to: AI, BCIs, novel computing, education, etc).</li>
-              <li>Enhancing optimization and efficiency (including but not limited to: productivity tools, reducing friction, etc).</li>
-            </ul>
-            
-            <div className="flex flex-col sm:flex-row gap-4 pt-4 mb-6">
-              <Link 
-                href="#projects"
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium py-3 px-6 rounded-lg transition-all flex items-center justify-center"
-              >
-                Explore My Work
-              </Link>
-              <Link 
-                href="#contact"
-                className="bg-transparent border border-gray-700 hover:border-gray-500 text-gray-300 hover:text-white font-medium py-3 px-6 rounded-lg transition-all flex items-center justify-center"
-              >
-                Get In Touch
-              </Link>
-            </div>
-          </motion.div>
-          
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex-1 flex justify-center md:justify-end"
-          >
-            <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-purple-500/50">
-              {/* Replace with your image */}
-              <Image
-                src="/images/me.png"
-                alt="Rut Mehta"
-                fill
-                className="object-cover"
-              />
-            </div>
-          </motion.div>
-        </div>
-        
-        {/* Scroll indicator */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 1 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
+      {/* Layer 1: Particle Background (z-0) */}
+      <ParticleBackground />
+
+      {/* Layer 2: ASCII Wave (z-5) */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 pointer-events-none"
+        style={{ zIndex: 5, mixBlendMode: 'screen' }}
+      />
+
+      {/* Content */}
+      <div className="relative z-10 container-narrow text-center">
+        <div
+          className={`transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
         >
-          <span className="text-gray-400 text-sm mb-2">Scroll Down</span>
-          <motion.div 
-            animate={{ 
-              y: [0, 10, 0],
-            }} 
-            transition={{ 
-              repeat: Infinity,
-              duration: 1.5
-            }}
-            className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center pt-2"
-          >
-            <motion.div className="w-1.5 h-1.5 bg-gray-400 rounded-full" />
-          </motion.div>
-        </motion.div>
+          {/* Small intro text */}
+          <p className="text-gray-500 text-sm font-mono mb-6 tracking-wider">
+            founder / engineer / researcher
+          </p>
+
+          {/* Name with scramble effect */}
+          <h1 className="text-5xl md:text-7xl font-medium tracking-tight mb-4 font-mono">
+            {nameText || '\u00A0'}
+          </h1>
+
+          {/* Tagline */}
+          <p className="text-xl md:text-2xl text-gray-400 mb-8">
+            {taglineText || '\u00A0'}
+          </p>
+
+          {/* Description */}
+          <p className="text-gray-500 max-w-lg mx-auto mb-12 leading-relaxed">
+            Rutgers CS + Business Analytics grad. 2x founder. Currently building{' '}
+            <Link href="https://interfere.ai" target="_blank" className="text-white hover:underline underline-offset-4">
+              Interfere
+            </Link>{' '}
+            (YC S25) — self-healing software.
+          </p>
+
+          {/* Minimal CTAs */}
+          <div className="flex items-center justify-center gap-6">
+            <Link
+              href="#projects"
+              className="text-sm text-gray-400 hover:text-white transition-colors underline underline-offset-4"
+            >
+              View work
+            </Link>
+            <span className="text-gray-700">|</span>
+            <Link
+              href="#contact"
+              className="text-sm text-gray-400 hover:text-white transition-colors underline underline-offset-4"
+            >
+              Get in touch
+            </Link>
+            <span className="text-gray-700">|</span>
+            <button
+              onClick={() => {
+                const event = new KeyboardEvent('keydown', {
+                  key: 'k',
+                  metaKey: true,
+                  bubbles: true,
+                });
+                document.dispatchEvent(event);
+              }}
+              className="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-2"
+            >
+              <kbd className="text-xs">⌘K</kbd>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
+        <div className="flex flex-col items-center gap-2 text-gray-600">
+          <span className="text-xs font-mono">scroll</span>
+          <div className="w-px h-8 bg-gradient-to-b from-gray-600 to-transparent" />
+        </div>
       </div>
     </section>
   );

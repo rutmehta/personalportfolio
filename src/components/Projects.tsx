@@ -1,287 +1,180 @@
 'use client';
-import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { FiExternalLink, FiGithub, FiGlobe } from 'react-icons/fi';
+import { useState, useRef, useEffect } from 'react';
+import Link from 'next/link';
 
 const projects = [
   {
     title: 'Graphene',
-    description: 'Architected browser-based AI agent framework using TypeScript/Python and Browser-Use to build a Large Action Model. Implementing Retrieval Augmented Generation on your browser session through Qdrant and OpenAI.',
-    image: '/images/project-ai.jpg',
-    placeholder: 'bg-gradient-to-br from-blue-500/70 to-purple-500/70',
-    tags: ['TypeScript', 'Python', 'AI', 'Browser-Use', 'RAG', 'Qdrant', 'OpenAI'],
-    links: {
-      demo: '#',
-      github: 'https://www.github.com/rutmehta',
-    },
-    featured: true
+    description: 'AI-powered browser. Browser-based agent framework using Browser-Use to build a Large Action Model with RAG.',
+    tags: ['TypeScript', 'Python', 'AI', 'Browser'],
+    link: 'https://github.com/rutmehta',
+    featured: true,
+    year: '2024',
   },
   {
-    title: 'SageTech',
-    description: 'Architected Unity-based experiential learning platform; leveraged C++ and C# for performance-critical modules. Developed Python-based ML models trained on XR headset and eye-tracking data achieving ≥ 95% accuracy in predicting student engagement and retention. Created text-to-3D generative AI system using Transformer architectures reducing asset creation time by ≥ 70%.',
-    image: '/images/project-sagetech.jpg',
-    placeholder: 'bg-gradient-to-br from-purple-500/70 to-pink-500/70',
-    tags: ['Unity', 'C++', 'C#', 'Python', 'ML', 'XR', 'Generative AI'],
-    links: {
-      demo: '#',
-      website: 'https://www.sagetech.info',
-    },
-    featured: true
+    title: 'SageTech / MetaWeaver',
+    description: 'Unity-based XR learning platform. ML models for engagement prediction (95%+ accuracy). Text-to-3D generative AI.',
+    tags: ['Unity', 'C#', 'ML', 'XR'],
+    link: 'https://sagetech.info',
+    featured: true,
+    year: '2021',
   },
   {
-    title: 'AGI House x SCSP AI Defense Hackathon Winner',
-    description: 'Winner of the AGI House x SCSP AI Defense Hackathon ($25,000) – built a drone sentry using Computer Vision, LangChain, Llama, and Modal.',
-    image: '/images/project-drone.jpg',
-    placeholder: 'bg-gradient-to-br from-green-500/70 to-blue-500/70',
-    tags: ['Computer Vision', 'LangChain', 'Llama', 'Modal', 'Drone'],
-    links: {
-      demo: 'https://www.linkedin.com/posts/rutm_%F0%9D%96%AB%F0%9D%97%82%F0%9D%96%BF%F0%9D%96%BE-%F0%9D%97%8E%F0%9D%97%89%F0%9D%96%BD%F0%9D%96%BA%F0%9D%97%8D%F0%9D%96%BE-%F0%9D%96%BA%F0%9D%97%80%F0%9D%96%BA%F0%9D%97%82%F0%9D%97%87-%F0%9D%96%B3%F0%9D%97%81%F0%9D%97%82%F0%9D%97%8C-activity-7313534496790761473-_79e',
-      github: 'https://github.com/DivyamJindal/sentry',
-    },
-    featured: true
+    title: 'Drone Sentry',
+    description: 'AGI House AI Defense Hackathon winner ($25K). Hybrid aerial/underwater autonomous patrol system using LangChain and Llama.',
+    tags: ['CV', 'LangChain', 'Llama'],
+    link: 'https://github.com/DivyamJindal/sentry',
+    featured: true,
+    year: '2024',
   },
   {
-    title: 'Job Hunt Game - GenAI',
-    description: 'An interactive platformer game for CS students featuring AI-powered interview simulations. Built with Phaser 3, it includes coding challenges, computer science problems, and skill progression systems that unlock abilities as players advance through their career journey.',
-    image: '/images/project-jobhunt.jpg',
-    placeholder: 'bg-gradient-to-br from-blue-400/70 to-cyan-500/70',
-    tags: ['JavaScript', 'Crew.AI', 'Phaser 3', 'GenAI', 'Game Development', 'Educational'],
-    links: {
-      demo: '#',
-      github: 'https://github.com/AdmiralX7/UnemploymentStudios',
-    },
-    featured: true
+    title: 'SDIM Quantum Simulator',
+    description: 'Qudit stabilizer simulator for quantum computing research. Presented at PLanQC 2025, submitted to ASPLOS 2026.',
+    tags: ['Quantum', 'Python', 'Research'],
+    link: 'https://arxiv.org/abs/2511.12777',
+    featured: true,
+    year: '2025',
   },
   {
-    title: 'Mangrove Browser & Extension',
-    description: 'Developed a custom browser and extension for enhanced web browsing with privacy-focused features. The browser provides a streamlined interface while the extension adds functionality for improved user experience.',
-    image: '/images/project-mangrove.jpg',
-    placeholder: 'bg-gradient-to-br from-green-400/70 to-emerald-600/70',
-    tags: ['JavaScript', 'Browser Extension', 'Web Development', 'Privacy'],
-    links: {
-      github: 'https://github.com/rutmehta/MangroveBrowser',
-      website: 'https://github.com/rutmehta/MangroveExtension',
-    },
-    featured: false
+    title: 'Job Hunt Game',
+    description: 'Interactive platformer for CS students with AI-powered interview simulations using Crew.AI.',
+    tags: ['Phaser', 'Crew.AI', 'GenAI'],
+    link: 'https://github.com/AdmiralX7/UnemploymentStudios',
+    year: '2024',
   },
   {
-    title: 'J&J & AWS Black Tech Health Hackathon',
-    description: 'Top 5 Finish in the J&J & AWS Black Tech Health Hackathon. Built AWS SageMaker pipeline achieving ≥93% F1-score.',
-    image: '/images/project-health.jpg',
-    placeholder: 'bg-gradient-to-br from-yellow-500/70 to-red-500/70',
-    tags: ['AWS', 'SageMaker', 'ML Pipeline', 'Healthcare'],
-    links: {
-      demo: '#',
-      github: '#',
-    },
-    featured: false
-  },
-  {
-    title: 'GMaps × Rutgers',
-    description: 'Custom integration of Google Maps API with Rutgers University data to create interactive campus navigation and information system.',
-    image: '/images/project-gmaps.jpg',
-    placeholder: 'bg-gradient-to-br from-red-500/70 to-amber-500/70',
-    tags: ['Google Maps API', 'Jupyter Notebook', 'Data Analysis', 'Geospatial'],
-    links: {
-      github: 'https://github.com/rutmehta/GMapsxRutgers',
-    },
-    featured: false
+    title: 'Mangrove Browser',
+    description: 'Custom browser and extension with privacy-focused features.',
+    tags: ['JavaScript', 'Browser'],
+    link: 'https://github.com/rutmehta/MangroveBrowser',
+    year: '2023',
   },
   {
     title: 'Auto Job',
-    description: 'Automated job application tool that streamlines the job search process, saving time and increasing efficiency for job seekers.',
-    image: '/images/project-autojob.jpg',
-    placeholder: 'bg-gradient-to-br from-purple-400/70 to-blue-500/70',
-    tags: ['Automation', 'Python', 'Web Scraping', 'Job Search'],
-    links: {
-      github: 'https://github.com/rutmehta/auto_job',
-    },
-    featured: false
+    description: 'Automated job application tool for streamlining job search.',
+    tags: ['Python', 'Automation'],
+    link: 'https://github.com/rutmehta/auto_job',
+    year: '2023',
   },
-  {
-    title: 'FoodStash App',
-    description: 'An application that tracks household food inventory to reduce waste and improve meal planning. Helps users manage their grocery shopping and food consumption more efficiently.',
-    image: '/images/project-foodstash.jpg',
-    placeholder: 'bg-gradient-to-br from-green-500/70 to-yellow-400/70',
-    tags: ['Mobile App', 'Food Tracking', 'Inventory Management'],
-    links: {
-      github: 'https://github.com/rutmehta/FoodStashApp',
-    },
-    featured: false
-  },
-  {
-    title: 'EnviroCycle',
-    description: 'Environmental sustainability project focused on recycling and waste management through technology innovation.',
-    image: '/images/project-envirocycle.jpg',
-    placeholder: 'bg-gradient-to-br from-green-600/70 to-blue-400/70',
-    tags: ['Environment', 'Sustainability', 'Recycling'],
-    links: {
-      github: 'https://github.com/rutmehta/EnviroCycle',
-    },
-    featured: false
-  },
-  {
-    title: 'AI Consulting for Fortune 50 TMT Client',
-    description: 'Analyzed AI compute hardware (GPUs, TPUs, ASICs, FPGAs, etc) and memory (HBM3E) for Fortune 50 TMT client. Researched AI tooling layers (foundational data, orchestration frameworks); pitched Coreweave, Sambanova Systems, etc. Advised on build vs. buy decisions or partner strategies for emerging technologies.',
-    image: '/images/project-consulting.jpg',
-    placeholder: 'bg-gradient-to-br from-red-500/70 to-purple-500/70',
-    tags: ['AI Hardware', 'Consulting', 'GPU', 'TPU', 'ASIC', 'FPGA'],
-    links: {},
-    featured: false
-  }
 ];
 
 export default function Projects() {
-  const [filter, setFilter] = useState('all');
-  
-  const filteredProjects = filter === 'all' 
-    ? projects 
-    : filter === 'featured' 
-      ? projects.filter(p => p.featured) 
-      : projects.filter(p => p.tags.includes(filter));
-  
-  const uniqueTags = Array.from(new Set(projects.flatMap(p => p.tags)));
-  
+  const [showAll, setShowAll] = useState(false);
+  const [inView, setInView] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  const displayedProjects = showAll ? projects : projects.filter(p => p.featured);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="projects" className="py-20 md:py-28 bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Projects</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-6"></div>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            A showcase of my technical projects spanning multiple domains including AI, blockchain, 
-            web development, and more. Each project demonstrates different aspects of my skill set.
-          </p>
-        </motion.div>
-        
-        {/* Filter Buttons */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
-          <button 
-            onClick={() => setFilter('all')}
-            className={`px-4 py-2 rounded-full text-sm transition-all ${
-              filter === 'all' 
-                ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30' 
-                : 'border border-gray-700 text-gray-400 hover:text-gray-300'
-            }`}
+    <section id="projects" ref={sectionRef} className="py-24 md:py-32 border-t border-gray-900">
+      <div className="container-wide">
+        {/* Section Header */}
+        <div className="flex items-end justify-between mb-16">
+          <div>
+            <p className="text-gray-500 text-sm font-mono mb-2">01</p>
+            <h2 className="text-3xl md:text-4xl font-medium tracking-tight">Projects</h2>
+          </div>
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className="text-sm text-gray-500 hover:text-white transition-colors underline underline-offset-4"
           >
-            All Projects
+            {showAll ? 'Show featured' : 'View all'}
           </button>
-          <button 
-            onClick={() => setFilter('featured')}
-            className={`px-4 py-2 rounded-full text-sm transition-all ${
-              filter === 'featured' 
-                ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30' 
-                : 'border border-gray-700 text-gray-400 hover:text-gray-300'
-            }`}
-          >
-            Featured
-          </button>
-          {uniqueTags.slice(0, 5).map(tag => (
-            <button 
-              key={tag}
-              onClick={() => setFilter(tag)}
-              className={`px-4 py-2 rounded-full text-sm transition-all ${
-                filter === tag 
-                  ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30' 
-                  : 'border border-gray-700 text-gray-400 hover:text-gray-300'
-              }`}
-            >
-              {tag}
-            </button>
-          ))}
         </div>
-        
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((project, index) => (
-            <motion.div
+
+        {/* Projects List */}
+        <div className="space-y-px bg-gray-900">
+          {displayedProjects.map((project, index) => (
+            <Link
               key={project.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gray-800/30 rounded-xl overflow-hidden border border-gray-700 hover:border-purple-500/50 transition-all hover:shadow-lg hover:shadow-purple-500/10 group"
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`group block bg-black p-6 md:p-8 transition-all duration-500 hover:bg-gray-950 ${
+                inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
+              style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <div className="h-48 relative overflow-hidden">
-                {/* Using placeholder color until actual images are added */}
-                <div className={`absolute inset-0 ${project.placeholder}`}>
-                  <div className="w-full h-full flex items-center justify-center text-white text-opacity-30 text-7xl font-bold">
-                    {project.title.charAt(0)}
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div className="flex-1">
+                  <div className="flex items-center gap-4 mb-2">
+                    <h3 className="text-lg md:text-xl font-medium text-white group-hover:text-gray-300 transition-colors">
+                      {project.title}
+                    </h3>
+                    <span className="text-gray-600 text-sm font-mono">{project.year}</span>
+                    {project.featured && (
+                      <span className="hidden md:inline-block w-2 h-2 bg-white rounded-full" />
+                    )}
                   </div>
+                  <p className="text-gray-500 text-sm md:text-base max-w-2xl">
+                    {project.description}
+                  </p>
                 </div>
-                {/* Uncomment when you have actual images */}
-                {/* <Image 
-                  src={project.image} 
-                  alt={project.title} 
-                  fill
-                  className="object-cover transition-transform group-hover:scale-105"
-                /> */}
-              </div>
-              
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-white mb-2">{project.title}</h3>
-                <p className="text-gray-400 text-sm mb-4">{project.description}</p>
-                
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tags.map(tag => (
-                    <span key={tag} className="px-2 py-1 text-xs rounded-full bg-gray-700/50 text-gray-300">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                
-                <div className="flex gap-4">
-                  {project.links.demo && (
-                    <a 
-                      href={project.links.demo} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-sm text-purple-400 hover:text-purple-300 transition-colors"
-                    >
-                      <FiExternalLink className="text-lg" /> Demo
-                    </a>
-                  )}
-                  
-                  {project.links.github && (
-                    <a 
-                      href={project.links.github} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-sm text-purple-400 hover:text-purple-300 transition-colors"
-                    >
-                      <FiGithub className="text-lg" /> Code
-                    </a>
-                  )}
-                  
-                  {project.links.website && (
-                    <a 
-                      href={project.links.website} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-sm text-purple-400 hover:text-purple-300 transition-colors"
-                    >
-                      <FiGlobe className="text-lg" /> Website
-                    </a>
-                  )}
+
+                <div className="flex items-center gap-4">
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.slice(0, 3).map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs text-gray-600 font-mono"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <svg
+                    className="w-5 h-5 text-gray-600 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={1.5}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
+                    />
+                  </svg>
                 </div>
               </div>
-            </motion.div>
+            </Link>
           ))}
         </div>
-        
-        <div className="text-center mt-12">
-          <a 
-            href="#" 
-            className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 font-medium transition-colors"
+
+        {/* GitHub Link */}
+        <div className="mt-12 text-center">
+          <Link
+            href="https://github.com/rutmehta"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-white transition-colors"
           >
-            View All Projects <FiExternalLink />
-          </a>
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                fillRule="evenodd"
+                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                clipRule="evenodd"
+              />
+            </svg>
+            More on GitHub
+          </Link>
         </div>
       </div>
     </section>

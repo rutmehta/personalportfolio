@@ -1,14 +1,29 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import CommandPalette from "../components/CommandPalette";
 
-const inter = Inter({ subsets: ["latin"] });
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+});
 
 export const metadata: Metadata = {
-  title: "Rut Mehta - Tech Innovator & Entrepreneur",
-  description: "Personal portfolio of Rut Mehta, a Rutgers graduate, tech innovator, entrepreneur, and researcher building solutions that make a difference.",
+  title: "Rut Mehta",
+  description: "Founder, engineer, researcher. Building for humanity.",
+  openGraph: {
+    title: "Rut Mehta",
+    description: "Founder, engineer, researcher. Building for humanity.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Rut Mehta",
+    description: "Founder, engineer, researcher. Building for humanity.",
+  },
 };
 
 export default function RootLayout({
@@ -17,9 +32,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth dark">
-      <body className={`${inter.className} bg-black text-white`}>
+    <html lang="en" className={`${GeistSans.variable} ${jetbrainsMono.variable}`}>
+      <body className="bg-black text-white antialiased">
         <Navbar />
+        <CommandPalette />
         {children}
         <Footer />
       </body>

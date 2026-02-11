@@ -1,113 +1,106 @@
 'use client';
-import { motion } from 'framer-motion';
-import { FiExternalLink } from 'react-icons/fi';
+import { useRef, useState, useEffect } from 'react';
+import Link from 'next/link';
 
-const researchPapers = [
+const research = [
   {
     title: 'SDIM: A Qudit Stabilizer Simulator',
-    journal: 'PLanQC 2025 & ASPLOS 2026',
-    date: '2025',
-    description: 'Presented SDIM, a stabilizer circuit simulator for qudits, at PLanQC 2025 and submitted to ASPLOS 2026. Explore the simulator and code.',
+    venue: 'PLanQC 2025 @ ASPLOS 2026',
+    description: 'Efficient simulation methods for quantum stabilizer states in higher-dimensional quantum systems.',
+    tags: ['Quantum Computing', 'Simulation'],
     link: 'https://popl25.sigplan.org/details/planqc-2025-papers/17/Sdim-A-Qudit-Stabilizer-Simulator',
-    tags: ['Quantum Computing', 'Qudits', 'Simulator']
   },
   {
-    title: 'Literature Review: XR, Experiential & Multimedia Learning',
-    journal: 'Aresty Rutgers Undergraduate Research Journal',
-    date: '2024',
-    description: 'Comprehensive literature review on the intersection of Extended Reality, Experiential Learning, and Multimedia Learning.',
+    title: 'XR, Experiential & Multimedia Learning',
+    venue: 'Aresty Rutgers Journal',
+    description: 'Research on immersive learning experiences and their impact on student engagement and retention.',
+    tags: ['XR', 'Education', 'ML'],
     link: 'https://arestyrurj.libraries.rutgers.edu/index.php/arestyrurj/article/view/239',
-    tags: ['XR', 'Experiential Learning', 'Multimedia']
-  }
+  },
 ];
 
 export default function Research() {
+  const [inView, setInView] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="research" className="py-20 md:py-28">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Research Publications</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-6"></div>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            My published research explores cutting-edge technologies and their real-world applications. 
-            Each publication represents a significant contribution to its respective field.
-          </p>
-        </motion.div>
-        
-        <div className="space-y-10">
-          {researchPapers.map((paper, index) => (
-            <motion.div
-              key={paper.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gray-800/30 rounded-xl p-6 border border-gray-700 hover:border-blue-500/30 transition-all"
+    <section id="research" ref={sectionRef} className="py-24 md:py-32 border-t border-gray-900">
+      <div className="container-wide">
+        {/* Section Header */}
+        <div className="mb-16">
+          <p className="text-gray-500 text-sm font-mono mb-2">03</p>
+          <h2 className="text-3xl md:text-4xl font-medium tracking-tight">Research</h2>
+        </div>
+
+        {/* Research Items */}
+        <div className="grid gap-px bg-gray-900">
+          {research.map((item, index) => (
+            <Link
+              key={item.title}
+              href={item.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`group bg-black p-6 md:p-8 transition-all duration-700 hover:bg-gray-950 ${
+                inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
+              style={{ transitionDelay: `${index * 150}ms` }}
             >
-              <div className="flex flex-col md:flex-row gap-6">
-                <div className="md:w-4/5">
-                  <h3 className="text-xl font-semibold text-white mb-2">{paper.title}</h3>
-                  <div className="mb-3">
-                    <span className="text-blue-400">{paper.journal}</span>
-                    <span className="mx-2 text-gray-500">•</span>
-                    <span className="text-gray-400">{paper.date}</span>
-                  </div>
-                  <p className="text-gray-300 mb-4">{paper.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {paper.tags.map(tag => (
-                      <span 
-                        key={tag} 
-                        className="px-3 py-1 text-xs rounded-full bg-blue-900/30 text-blue-300 border border-blue-800/30"
+              <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
+                <div className="flex-1">
+                  <p className="text-gray-600 text-sm font-mono mb-2">{item.venue}</p>
+                  <h3 className="text-lg md:text-xl font-medium text-white group-hover:text-gray-300 transition-colors mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-500 text-sm max-w-2xl">
+                    {item.description}
+                  </p>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="flex flex-wrap gap-2">
+                    {item.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs text-gray-600 font-mono"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
-                </div>
-                <div className="md:w-1/5 flex md:justify-end items-start">
-                  <a 
-                    href={paper.link} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 px-4 py-2 rounded-lg bg-blue-600/20 text-blue-400 hover:bg-blue-600/30 transition-colors border border-blue-600/30"
+                  <svg
+                    className="w-5 h-5 text-gray-600 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={1.5}
                   >
-                    Read Paper <FiExternalLink />
-                  </a>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
+                    />
+                  </svg>
                 </div>
               </div>
-            </motion.div>
+            </Link>
           ))}
         </div>
-        
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mt-16 p-6 rounded-xl bg-gradient-to-r from-blue-900/30 to-purple-900/30 border border-blue-800/30"
-        >
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div>
-              <h3 className="text-xl font-semibold text-white mb-2">Interested in Research Collaboration?</h3>
-              <p className="text-gray-300">
-                I&apos;m always open to collaborating on innovative research projects at the intersection 
-                of technology and real-world applications.
-              </p>
-            </div>
-            <a 
-              href="#contact" 
-              className="px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors whitespace-nowrap"
-            >
-              Get in Touch
-            </a>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

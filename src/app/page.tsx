@@ -1,20 +1,18 @@
 import Hero from '../components/Hero';
 import About from '../components/About';
-import Experience from '../components/Experience';
 import Projects from '../components/Projects';
 import Research from '../components/Research';
-import Activities from '../components/Activities';
 import Contact from '../components/Contact';
+import AsciiVideoDivider from '../components/AsciiVideoDivider';
 
 export default function Home() {
   return (
     <main>
       <Hero />
-      <About />
-      <Experience />
+      <AsciiVideoDivider />
       <Projects />
+      <About />
       <Research />
-      <Activities />
       <Contact />
     </main>
   );
