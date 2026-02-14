@@ -7,7 +7,7 @@ import { CommandPaletteTrigger } from './CommandPalette';
 const navItems = [
   { name: 'Projects', href: '#projects' },
   { name: 'About', href: '#about' },
-  { name: 'Research', href: '#research' },
+  { name: 'Journey', href: '/journey' },
   { name: 'Blog', href: '/blog' },
   { name: 'Contact', href: '#contact' },
 ];

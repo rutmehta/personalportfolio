@@ -1,5 +1,19 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+
+const research = [
+  {
+    title: 'SDIM: A Qudit Stabilizer Simulator',
+    venue: 'PLanQC 2025 @ POPL',
+    link: 'https://arxiv.org/abs/2511.12777',
+  },
+  {
+    title: 'XR & Experiential Learning',
+    venue: 'Aresty Research Journal',
+    link: 'https://arestyrurj.libraries.rutgers.edu/index.php/arestyrurj/article/view/239',
+  },
+];
 
 const skills = [
   'TypeScript', 'Python', 'Java', 'C++', 'C#', 'Rust',
@@ -9,13 +23,6 @@ const skills = [
 ];
 
 const experience = [
-  {
-    company: 'Interfere',
-    role: 'Co-founder',
-    period: 'Jan 2026 – Present',
-    description: 'Self-healing software. Automatically detects and fixes issues in production systems.',
-    highlight: 'YC S25',
-  },
   {
     company: 'Roam',
     role: 'Founding AI Engineer',
@@ -36,7 +43,7 @@ const experience = [
     description: 'Coordinated 7 cross-functional teams on AI hardware market trial. Evaluated AI/chipset partners for HW/SW stack.',
   },
   {
-    company: 'NASA Ames',
+    company: 'NASA Ames Research Center',
     role: 'Service Design Intern',
     period: 'Jan – May 2023',
     description: 'Analyzed 100+ hours of interviews, 26,000+ tags to redesign SBIR/STTR process for NASA Admin.',
@@ -92,7 +99,7 @@ export default function About() {
       <div className="container-wide">
         {/* Section Header */}
         <div className="mb-16">
-          <p className="text-gray-500 text-sm font-mono mb-2">02</p>
+          <p className="text-gray-500 text-sm font-mono mb-2">01</p>
           <h2 className="text-3xl md:text-4xl font-medium tracking-tight">About</h2>
         </div>
 
@@ -161,9 +168,9 @@ export default function About() {
                   <div className="flex-1">
                     <div className="flex items-center gap-2 flex-wrap">
                       <span className="text-white font-medium">{exp.company}</span>
-                      {exp.highlight && (
+                      {(exp as { highlight?: string }).highlight && (
                         <span className="text-xs px-2 py-0.5 bg-white/10 text-gray-300 rounded">
-                          {exp.highlight}
+                          {(exp as { highlight?: string }).highlight}
                         </span>
                       )}
                     </div>
@@ -183,7 +190,7 @@ export default function About() {
           >
             <h3 className="text-lg font-medium mb-4">Awards</h3>
             <div className="space-y-3">
-              {awards.slice(0, 6).map((award, i) => (
+              {awards.slice(0, 5).map((award, i) => (
                 <div key={i} className="flex items-start justify-between gap-4">
                   <div>
                     <p className="text-gray-300 text-sm">{award.title}</p>
@@ -191,6 +198,29 @@ export default function About() {
                   </div>
                   <span className="text-gray-500 text-sm font-mono flex-shrink-0">{award.prize}</span>
                 </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Research Card */}
+          <div
+            className={`bento-item lg:col-span-3 transition-all duration-700 delay-300 ${
+              inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`}
+          >
+            <h3 className="text-lg font-medium mb-4">Research</h3>
+            <div className="space-y-4">
+              {research.map((item, i) => (
+                <Link
+                  key={i}
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block group"
+                >
+                  <p className="text-white group-hover:text-gray-300 transition-colors">{item.title}</p>
+                  <p className="text-gray-600 text-sm">{item.venue}</p>
+                </Link>
               ))}
             </div>
           </div>

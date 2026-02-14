@@ -6,7 +6,7 @@ const sections = [
   { name: 'Home', href: '#home', shortcut: 'H' },
   { name: 'Projects', href: '#projects', shortcut: 'P' },
   { name: 'About', href: '#about', shortcut: 'A' },
-  { name: 'Research', href: '#research', shortcut: 'R' },
+  { name: 'Journey', href: '/journey', shortcut: 'J' },
   { name: 'Blog', href: '/blog', shortcut: 'B' },
   { name: 'Contact', href: '#contact', shortcut: 'C' },
 ];

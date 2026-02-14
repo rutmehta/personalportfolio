@@ -12,14 +12,6 @@ const projects = [
     year: '2024',
   },
   {
-    title: 'SageTech / MetaWeaver',
-    description: 'Unity-based XR learning platform. ML models for engagement prediction (95%+ accuracy). Text-to-3D generative AI.',
-    tags: ['Unity', 'C#', 'ML', 'XR'],
-    link: 'https://sagetech.info',
-    featured: true,
-    year: '2021',
-  },
-  {
     title: 'Drone Sentry',
     description: 'AGI House AI Defense Hackathon winner ($25K). Hybrid aerial/underwater autonomous patrol system using LangChain and Llama.',
     tags: ['CV', 'LangChain', 'Llama'],
@@ -28,18 +20,11 @@ const projects = [
     year: '2024',
   },
   {
-    title: 'SDIM Quantum Simulator',
-    description: 'Qudit stabilizer simulator for quantum computing research. Presented at PLanQC 2025, submitted to ASPLOS 2026.',
-    tags: ['Quantum', 'Python', 'Research'],
-    link: 'https://arxiv.org/abs/2511.12777',
-    featured: true,
-    year: '2025',
-  },
-  {
     title: 'Job Hunt Game',
     description: 'Interactive platformer for CS students with AI-powered interview simulations using Crew.AI.',
     tags: ['Phaser', 'Crew.AI', 'GenAI'],
     link: 'https://github.com/AdmiralX7/UnemploymentStudios',
+    featured: true,
     year: '2024',
   },
   {
@@ -88,7 +73,7 @@ export default function Projects() {
         {/* Section Header */}
         <div className="flex items-end justify-between mb-16">
           <div>
-            <p className="text-gray-500 text-sm font-mono mb-2">01</p>
+            <p className="text-gray-500 text-sm font-mono mb-2">02</p>
             <h2 className="text-3xl md:text-4xl font-medium tracking-tight">Projects</h2>
           </div>
           <button
