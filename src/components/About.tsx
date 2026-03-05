@@ -69,7 +69,7 @@ const experience = [
     role: 'AI Hardware/Software Intern',
     period: 'May 2024 – Aug 2024',
     description: 'Prototyped and built an AI phone end-to-end — hardware, software, storytelling, and GTM.',
-    link: 'www.tmobile.com'
+    link: 'https://www.tmobile.com'
   },
   {
     company: 'NASA Ames Research Center',
@@ -177,7 +177,7 @@ export default function About() {
                 <span className="text-gray-600">|</span>
                 <span className="text-gray-400">SAS Honors</span>
               </div>
-              <p className="text-gray-600 text-xs">
+              <p className="text-gray-500 text-xs">
                 Dean&apos;s List · Scarlet Knight Scholar · CS Honors
               </p>
             </div>
@@ -194,7 +194,7 @@ export default function About() {
               {experience.map((exp, i) => (
                 <div key={i} className="flex flex-col md:flex-row md:items-start gap-2 md:gap-8">
                   <div className="md:w-36 flex-shrink-0">
-                    <span className="text-gray-600 text-sm font-mono">{exp.period}</span>
+                    <span className="text-gray-500 text-sm font-mono">{exp.period}</span>
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2 flex-wrap">

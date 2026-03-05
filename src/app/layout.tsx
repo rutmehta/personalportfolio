@@ -12,12 +12,17 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Rut Mehta",
+  metadataBase: new URL("https://rutmehta.com"),
+  title: {
+    default: "Rut Mehta",
+    template: "%s | Rut Mehta",
+  },
   description: "Founder, engineer, researcher. Building for humanity. AI at Endex.ai.",
   openGraph: {
     title: "Rut Mehta",
     description: "Founder, engineer, researcher. Building for humanity. AI at Endex.ai.",
     type: "website",
+    siteName: "Rut Mehta",
   },
   twitter: {
     card: "summary_large_image",
@@ -34,9 +39,17 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${GeistSans.variable} ${jetbrainsMono.variable}`}>
       <body className="bg-black text-white antialiased">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[10000] focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:rounded focus:text-sm focus:font-medium"
+        >
+          Skip to content
+        </a>
         <Navbar />
         <CommandPalette />
-        {children}
+        <div id="main-content">
+          {children}
+        </div>
         <Footer />
       </body>
     </html>

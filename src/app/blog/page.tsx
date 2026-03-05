@@ -2,8 +2,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
-// Blog posts - add your Craft doc URLs here
-// To get a Craft URL: Open doc → Share → Copy link
 const posts = [
   {
     title: 'Building AI Agents That Actually Work',
@@ -76,10 +74,8 @@ export default function BlogPage() {
           ))}
         </div>
 
-        {/* Simple instruction */}
-        <p className="mt-8 text-gray-600 text-sm text-center">
-          To add a post: Share your Craft doc and paste the URL in the code.
-        </p>
+        {/* Spacer */}
+        <div className="mt-8" />
       </div>
     </main>
   );

@@ -45,10 +45,12 @@ export default function Hero() {
     setMounted(true);
   }, []);
 
-  // Dense neural tissue animation
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
@@ -59,10 +61,14 @@ export default function Hero() {
     let cols = 0;
     let rows = 0;
 
-    // Generate dense neuron field
+    const isMobile = window.innerWidth < 768;
+    const targetFps = isMobile ? 24 : 60;
+    const frameInterval = 1000 / targetFps;
+    let lastFrameTime = 0;
+
     const generateNeurons = (): Neuron[] => {
       const neurons: Neuron[] = [];
-      const count = 400;
+      const count = isMobile ? 150 : 400;
 
       for (let i = 0; i < count; i++) {
         // Clustered distribution - some areas denser than others
@@ -127,7 +133,14 @@ export default function Hero() {
 
     let frameCount = 0;
 
-    const render = () => {
+    const render = (timestamp: number = 0) => {
+      const elapsed = timestamp - lastFrameTime;
+      if (elapsed < frameInterval) {
+        animationRef.current = requestAnimationFrame(render);
+        return;
+      }
+      lastFrameTime = timestamp - (elapsed % frameInterval);
+
       frameCount++;
       const neurons = neuronsRef.current;
       const waves = wavesRef.current;
@@ -301,7 +314,7 @@ export default function Hero() {
       animationRef.current = requestAnimationFrame(render);
     };
 
-    render();
+    animationRef.current = requestAnimationFrame(render);
 
     return () => {
       window.removeEventListener('resize', resize);
@@ -319,6 +332,8 @@ export default function Hero() {
       <canvas
         ref={canvasRef}
         className="absolute inset-0 z-0"
+        aria-hidden="true"
+        role="presentation"
       />
 
       {/* Content */}

@@ -51,7 +51,7 @@ export default function Contact() {
             inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
           }`}
         >
-          <p className="text-gray-500 text-sm font-mono mb-2">04</p>
+          <p className="text-gray-500 text-sm font-mono mb-2">03</p>
           <h2 className="text-3xl md:text-4xl font-medium tracking-tight mb-4">Get in touch</h2>
           <p className="text-gray-500 max-w-md mx-auto">
             Always down to talk about AI, startups, or wild ideas.

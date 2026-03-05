@@ -20,7 +20,6 @@ const links = [
 ];
 
 const actions = [
-  { name: 'Download Resume', action: 'resume' },
   { name: 'Copy Email', action: 'email' },
 ];
 
@@ -64,10 +63,7 @@ export default function CommandPalette() {
       return;
     }
 
-    // Handle actions
-    if (value === 'download resume') {
-      window.open('/resume.pdf', '_blank');
-    } else if (value === 'copy email') {
+    if (value === 'copy email') {
       navigator.clipboard.writeText('rutmehta222@gmail.com');
     }
   }, []);

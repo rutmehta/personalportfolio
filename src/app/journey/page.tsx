@@ -81,8 +81,8 @@ export default function JourneyPage() {
             </Link>
             <h1 className="text-4xl md:text-5xl font-medium tracking-tight mb-4">Journey</h1>
             <p className="text-gray-500 max-w-2xl">
-              A vertical timeline from 2026 downward. Minimal, chronological, and easy to scan.
-              Click any milestone to open the full story.
+              The milestones, roles, and projects that have shaped my path.
+              Click any to read the full story.
             </p>
           </div>
 
