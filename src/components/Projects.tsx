@@ -68,7 +68,7 @@ export default function Projects() {
   }, []);
 
   return (
-    <section id="projects" ref={sectionRef} className="py-24 md:py-32 border-t border-gray-900">
+    <section id="projects" ref={sectionRef} className="pt-12 md:pt-16 pb-24 md:pb-32 border-t border-gray-900">
       <div className="container-wide">
         {/* Section Header */}
         <div className="flex items-end justify-between mb-16">

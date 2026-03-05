@@ -13,16 +13,16 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "Rut Mehta",
-  description: "Founder, engineer, researcher. Building for humanity.",
+  description: "Founder, engineer, researcher. Building for humanity. AI at Endex.ai.",
   openGraph: {
     title: "Rut Mehta",
-    description: "Founder, engineer, researcher. Building for humanity.",
+    description: "Founder, engineer, researcher. Building for humanity. AI at Endex.ai.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Rut Mehta",
-    description: "Founder, engineer, researcher. Building for humanity.",
+    description: "Founder, engineer, researcher. Building for humanity. AI at Endex.ai.",
   },
 };
 

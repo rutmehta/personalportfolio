@@ -420,6 +420,18 @@ Quantum computing fascinates me because it represents a fundamentally different 
     writeup: `Closed my chapter at Roam after building core systems for text-to-game generation.`,
     relatedIds: ['roam'],
   },
+  {
+    id: 'endex',
+    year: 2026,
+    month: 2,
+    title: 'Joined Endex.ai',
+    subtitle: 'Member of Technical Staff — AI',
+    type: 'company',
+    description: 'Spearheading AI at Endex.',
+    writeup: `Joined Endex.ai as Member of Technical Staff, leading AI efforts.`,
+    link: 'https://endex.ai',
+    relatedIds: ['roam'],
+  },
 ];
 
 export const years = [2020, 2021, 2022, 2023, 2024, 2025, 2026];

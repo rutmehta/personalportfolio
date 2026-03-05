@@ -343,7 +343,16 @@ export default function Hero() {
 
           {/* Description */}
           <p className="text-gray-500 max-w-lg mx-auto mb-12 leading-relaxed">
-            Rutgers CS + Business Analytics grad. 2x founder. Building at the intersection of AI and human potential.
+            Exploring the frontier of intelligence and human potential, currently AI at{' '}
+            <a
+              href="https://endex.ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white transition-colors underline underline-offset-4"
+            >
+              Endex
+            </a>
+            .
           </p>
 
           {/* Minimal CTAs */}

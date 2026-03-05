@@ -33,7 +33,7 @@ export default function Footer() {
               LinkedIn
             </Link>
             <Link
-              href="https://twitter.com/rutmehta"
+              href="https://twitter.com/mehtarut"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-gray-600 hover:text-white transition-colors"

@@ -7,17 +7,10 @@ import Link from 'next/link';
 const posts = [
   {
     title: 'Building AI Agents That Actually Work',
-    description: 'Lessons learned from building Interfere and Graphene — practical insights on browser automation, RAG systems, and production AI.',
+    description: 'Practical insights on browser automation, RAG systems, and shipping production AI.',
     date: '2025-02-01',
-    url: '', // Add your Craft doc share link here
+    url: '',
     tags: ['AI', 'Engineering'],
-  },
-  {
-    title: 'From Hackathon to YC: The Interfere Story',
-    description: 'How a weekend project became a Y Combinator company. The decisions, pivots, and lessons along the way.',
-    date: '2025-01-15',
-    url: '', // Add your Craft doc share link here
-    tags: ['Startup', 'YC'],
   },
   {
     title: 'XR Learning: What the Research Actually Says',
@@ -36,10 +29,10 @@ export default function BlogPage() {
   }, []);
 
   return (
-    <main className="min-h-screen pt-24">
-      <div className="container-narrow py-16">
+    <main className="min-h-screen pt-24 pb-20">
+      <div className="container-wide">
         {/* Header */}
-        <div className="mb-16">
+        <div className="mb-12">
           <Link
             href="/"
             className="text-gray-500 text-sm hover:text-white transition-colors mb-8 inline-block"
@@ -47,8 +40,8 @@ export default function BlogPage() {
             ← Back
           </Link>
           <h1 className="text-4xl md:text-5xl font-medium tracking-tight mb-4">Blog</h1>
-          <p className="text-gray-500 max-w-lg">
-            Thoughts on building, research, and the intersection of AI and human potential.
+          <p className="text-gray-500 max-w-2xl">
+            Thoughts on building, research, and the frontier of intelligence.
           </p>
         </div>
 

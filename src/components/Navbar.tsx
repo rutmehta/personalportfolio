@@ -5,7 +5,6 @@ import { usePathname } from 'next/navigation';
 import { CommandPaletteTrigger } from './CommandPalette';
 
 const navItems = [
-  { name: 'Projects', href: '#projects' },
   { name: 'About', href: '#about' },
   { name: 'Journey', href: '/journey' },
   { name: 'Blog', href: '/blog' },

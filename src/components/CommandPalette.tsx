@@ -14,8 +14,9 @@ const sections = [
 const links = [
   { name: 'GitHub', href: 'https://github.com/rutmehta', external: true },
   { name: 'LinkedIn', href: 'https://linkedin.com/in/rutm', external: true },
-  { name: 'Twitter', href: 'https://twitter.com/rutmehta', external: true },
-  { name: 'Email', href: 'mailto:rut.mehta@rutgers.edu', external: true },
+  { name: 'Twitter', href: 'https://twitter.com/mehtarut', external: true },
+  { name: 'Email (Personal)', href: 'mailto:rutmehta222@gmail.com', external: true },
+  { name: 'Email (Work)', href: 'mailto:rut@endex.ai', external: true },
 ];
 
 const actions = [
@@ -67,7 +68,7 @@ export default function CommandPalette() {
     if (value === 'download resume') {
       window.open('/resume.pdf', '_blank');
     } else if (value === 'copy email') {
-      navigator.clipboard.writeText('rut.mehta@rutgers.edu');
+      navigator.clipboard.writeText('rutmehta222@gmail.com');
     }
   }, []);
 
