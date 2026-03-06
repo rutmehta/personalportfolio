@@ -120,7 +120,7 @@ export default function JourneyPage() {
                             <span className="absolute left-0 top-1.5 h-3 w-3 rounded-full bg-black border border-gray-700 transition-colors group-hover:border-white group-hover:bg-white" />
 
                             <div className="flex flex-wrap items-center gap-2 mb-1.5">
-                              <span className="text-[11px] font-mono text-gray-600">{formatPeriod(node)}</span>
+                              <span className="text-[11px] font-mono text-gray-500">{formatPeriod(node)}</span>
                               <span className={`text-[10px] uppercase tracking-[0.14em] ${TYPE_STYLE[node.type]}`}>
                                 {TYPE_LABEL[node.type]}
                               </span>

@@ -103,7 +103,7 @@ export default function Projects() {
                     <h3 className="text-lg md:text-xl font-medium text-white group-hover:text-gray-300 transition-colors">
                       {project.title}
                     </h3>
-                    <span className="text-gray-600 text-sm font-mono">{project.year}</span>
+                    <span className="text-gray-500 text-sm font-mono">{project.year}</span>
                     {project.featured && (
                       <span className="hidden md:inline-block w-2 h-2 bg-white rounded-full" />
                     )}
@@ -118,14 +118,14 @@ export default function Projects() {
                     {project.tags.slice(0, 3).map((tag) => (
                       <span
                         key={tag}
-                        className="text-xs text-gray-600 font-mono"
+                        className="text-xs text-gray-500 font-mono"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
                   <svg
-                    className="w-5 h-5 text-gray-600 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all"
+                    className="w-5 h-5 text-gray-500 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"

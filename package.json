@@ -11,10 +11,10 @@
   "dependencies": {
     "@fontsource/jetbrains-mono": "^5.2.8",
     "@heroicons/react": "^2.2.0",
+    "@vercel/analytics": "^1.6.1",
     "cmdk": "^1.1.1",
     "framer-motion": "^12.6.3",
     "geist": "^1.7.0",
-    "netlify": "^13.3.5",
     "next": "^15.5.12",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

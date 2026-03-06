@@ -14,7 +14,7 @@ const posts = [
     title: 'XR Learning: What the Research Actually Says',
     description: 'A synthesis of my published research on experiential learning, VR, and cognitive science.',
     date: '2024-04-20',
-    url: 'https://arestyrurj.libraries.rutgers.edu/index.php/arestyrurj/article/view/239',
+    url: '',
     tags: ['Research', 'XR'],
   },
 ];
@@ -65,7 +65,7 @@ export default function BlogPage() {
               ) : (
                 <div className="relative">
                   <PostContent post={post} />
-                  <span className="absolute top-0 right-0 text-xs text-gray-600 font-mono">
+                  <span className="absolute top-0 right-0 text-xs text-gray-500 font-mono">
                     Coming soon
                   </span>
                 </div>
@@ -85,7 +85,7 @@ function PostContent({ post }: { post: typeof posts[0] }) {
   return (
     <>
       <div className="flex items-center gap-4 mb-3">
-        <span className="text-gray-600 text-sm font-mono">
+        <span className="text-gray-500 text-sm font-mono">
           {new Date(post.date).toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'short',
@@ -94,7 +94,7 @@ function PostContent({ post }: { post: typeof posts[0] }) {
         </span>
         <div className="flex gap-2">
           {post.tags.map(tag => (
-            <span key={tag} className="text-xs text-gray-600 font-mono">
+            <span key={tag} className="text-xs text-gray-500 font-mono">
               {tag}
             </span>
           ))}

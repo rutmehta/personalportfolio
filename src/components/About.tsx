@@ -43,7 +43,16 @@ const skills = [
   { name: 'Kubernetes', url: 'https://kubernetes.io' },
 ];
 
-const experience = [
+interface ExperienceItem {
+  company: string;
+  role: string;
+  period: string;
+  description: string;
+  link?: string;
+  highlight?: string;
+}
+
+const experience: ExperienceItem[] = [
   {
     company: 'Endex.ai',
     role: 'Member of Technical Staff — AI',
@@ -69,14 +78,14 @@ const experience = [
     role: 'AI Hardware/Software Intern',
     period: 'May 2024 – Aug 2024',
     description: 'Prototyped and built an AI phone end-to-end — hardware, software, storytelling, and GTM.',
-    link: 'https://www.tmobile.com'
+    link: 'https://www.tmobile.com',
   },
   {
     company: 'NASA Ames Research Center',
     role: 'Service Design Intern',
     period: 'Jan 2023 – May 2023',
     description: 'Redesigned how NASA funds early-stage innovation.',
-    link: 'https://good-design.org/projects/redesigning-an-equitable-nasa-service-experience-for-small-businesses/'
+    link: 'https://good-design.org/projects/redesigning-an-equitable-nasa-service-experience-for-small-businesses/',
   },
   {
     company: 'SageTech',
@@ -89,7 +98,7 @@ const experience = [
     role: 'Level 2 Consultant',
     period: 'Aug 2021 – Present',
     description: 'Running computing infrastructure for 100,000+ students.',
-    link: 'https://it.rutgers.edu/'
+    link: 'https://it.rutgers.edu/',
   },
 ];
 
@@ -210,9 +219,9 @@ export default function About() {
                       ) : (
                         <span className="text-white font-medium">{exp.company}</span>
                       )}
-                      {(exp as { highlight?: string }).highlight && (
+                      {exp.highlight && (
                         <span className="text-xs px-2 py-0.5 bg-white/10 text-gray-300 rounded">
-                          {(exp as { highlight?: string }).highlight}
+                          {exp.highlight}
                         </span>
                       )}
                     </div>
@@ -232,11 +241,11 @@ export default function About() {
           >
             <h3 className="text-lg font-medium mb-4">Awards</h3>
             <div className="space-y-3">
-              {awards.slice(0, 5).map((award, i) => (
+              {awards.map((award, i) => (
                 <div key={i} className="flex items-start justify-between gap-4">
                   <div>
                     <p className="text-gray-300 text-sm">{award.title}</p>
-                    <p className="text-gray-600 text-xs">{award.year}</p>
+                    <p className="text-gray-500 text-xs">{award.year}</p>
                   </div>
                   <span className="text-gray-500 text-sm font-mono flex-shrink-0">{award.prize}</span>
                 </div>
@@ -262,9 +271,9 @@ export default function About() {
                 >
                   <div className="flex items-baseline gap-3 flex-wrap">
                     <p className="text-white group-hover:text-gray-300 transition-colors">{item.title}</p>
-                    <span className="text-gray-600 text-sm">{item.tagline}</span>
+                    <span className="text-gray-500 text-sm">{item.tagline}</span>
                   </div>
-                  <p className="text-gray-600 text-sm">{item.venue}</p>
+                  <p className="text-gray-500 text-sm">{item.venue}</p>
                 </Link>
               ))}
             </div>

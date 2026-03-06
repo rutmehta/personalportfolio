@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState, useRef } from 'react';
 import { useTextScrambleOnMount } from '@/hooks/useTextScramble';
+import { useCommandPalette } from '@/components/CommandPalette';
 import Link from 'next/link';
 
 interface Neuron {
@@ -22,6 +23,7 @@ interface Wave {
 }
 
 export default function Hero() {
+  const { setOpen: openCommandPalette, modKey } = useCommandPalette();
   const [mounted, setMounted] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number | null>(null);
@@ -91,7 +93,15 @@ export default function Hero() {
     };
 
     neuronsRef.current = generateNeurons();
-    wavesRef.current = [];
+    wavesRef.current = [
+      { x: 0.2, y: 0.3, radius: 0, strength: 1.2, speed: 0.018 },
+      { x: 0.8, y: 0.5, radius: 0.03, strength: 1.1, speed: 0.015 },
+      { x: 0.5, y: 0.2, radius: 0.06, strength: 1.0, speed: 0.02 },
+      { x: 0.4, y: 0.7, radius: 0.02, strength: 1.1, speed: 0.022 },
+      { x: 0.6, y: 0.8, radius: 0.08, strength: 1.0, speed: 0.017 },
+      { x: 0.3, y: 0.6, radius: 0.04, strength: 0.95, speed: 0.02 },
+      { x: 0.7, y: 0.3, radius: 0.01, strength: 1.05, speed: 0.019 },
+    ];
 
     const resize = () => {
       canvas.width = window.innerWidth;
@@ -109,12 +119,12 @@ export default function Hero() {
       const dy = curr.y - prev.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
 
-      if (dist > 15 && wavesRef.current.length < 10) {
+      if (dist > 8 && wavesRef.current.length < 10) {
         wavesRef.current.push({
           x: curr.x / canvas.width,
           y: curr.y / canvas.height,
           radius: 0,
-          strength: 0.9,
+          strength: 1.0,
           speed: 0.025,
         });
       }
@@ -126,10 +136,16 @@ export default function Hero() {
       mouseRef.current = { x: -1000, y: -1000 };
     };
 
+    const handleScroll = () => {
+      const scrollFraction = Math.min(window.scrollY / window.innerHeight, 1);
+      canvas.style.opacity = String(1 - scrollFraction * 0.75);
+    };
+
     resize();
     window.addEventListener('resize', resize);
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseleave', handleMouseLeave);
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     let frameCount = 0;
 
@@ -147,21 +163,21 @@ export default function Hero() {
       const mouse = mouseRef.current;
 
       // Spawn random activity waves
-      if (frameCount % 45 === 0 && waves.length < 8) {
+      if (frameCount % 12 === 0 && waves.length < 20) {
         waves.push({
           x: Math.random(),
           y: Math.random(),
           radius: 0,
-          strength: 0.7 + Math.random() * 0.3,
-          speed: 0.015 + Math.random() * 0.02,
+          strength: 1.0 + Math.random() * 0.5,
+          speed: 0.012 + Math.random() * 0.02,
         });
       }
 
       // Update waves
       for (let i = waves.length - 1; i >= 0; i--) {
         waves[i].radius += waves[i].speed;
-        waves[i].strength *= 0.995;
-        if (waves[i].strength < 0.05 || waves[i].radius > 1.5) {
+        waves[i].strength *= 0.997;
+        if (waves[i].strength < 0.03 || waves[i].radius > 1.8) {
           waves.splice(i, 1);
         }
       }
@@ -186,8 +202,8 @@ export default function Hero() {
           const dist = Math.sqrt(dx * dx + dy * dy);
           const ringDist = Math.abs(dist - wave.radius);
 
-          if (ringDist < 0.05) {
-            const intensity = (1 - ringDist / 0.05) * wave.strength;
+          if (ringDist < 0.1) {
+            const intensity = (1 - ringDist / 0.1) * wave.strength;
             waveActivation = Math.max(waveActivation, intensity);
           }
         }
@@ -199,8 +215,8 @@ export default function Hero() {
         const mouseDy = neuron.y - mouseNormY;
         const mouseDist = Math.sqrt(mouseDx * mouseDx + mouseDy * mouseDy);
 
-        if (mouseDist < 0.08) {
-          const mouseInfluence = (1 - mouseDist / 0.08) * 0.9;
+        if (mouseDist < 0.2) {
+          const mouseInfluence = (1 - mouseDist / 0.2) * 1.0;
           waveActivation = Math.max(waveActivation, mouseInfluence);
         }
 
@@ -209,7 +225,7 @@ export default function Hero() {
         neuron.activation += (targetActivation - neuron.activation) * 0.3;
 
         // Subtle pulse in base activation
-        neuron.baseActivation = 0.1 + Math.sin(frameCount * 0.02 + neuron.x * 10 + neuron.y * 10) * 0.05;
+        neuron.baseActivation = 0.25 + Math.sin(frameCount * 0.03 + neuron.x * 10 + neuron.y * 10) * 0.12;
       }
 
       // Render character grid
@@ -255,7 +271,7 @@ export default function Hero() {
           if (charIndex === 0) continue;
 
           // Opacity based on influence
-          const opacity = 0.08 + totalInfluence * 0.25;
+          const opacity = 0.18 + totalInfluence * 0.5;
           ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
           ctx.fillText(char, col * charWidth, row * fontSize + fontSize);
         }
@@ -264,11 +280,11 @@ export default function Hero() {
       // Draw subtle ASCII connections between active nearby neurons
       for (let i = 0; i < neurons.length; i++) {
         const n1 = neurons[i];
-        if (n1.activation < 0.35) continue;
+        if (n1.activation < 0.2) continue;
 
         for (let j = i + 1; j < neurons.length; j++) {
           const n2 = neurons[j];
-          if (n2.activation < 0.35) continue;
+          if (n2.activation < 0.2) continue;
 
           const dx = n2.x - n1.x;
           const dy = n2.y - n1.y;
@@ -303,7 +319,7 @@ export default function Hero() {
               const px = x1 + (x2 - x1) * t;
               const py = y1 + (y2 - y1) * t;
 
-              const alpha = 0.04 + combinedActivation * 0.08;
+              const alpha = 0.12 + combinedActivation * 0.2;
               ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
               ctx.fillText(lineChar, px, py);
             }
@@ -320,6 +336,7 @@ export default function Hero() {
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('scroll', handleScroll);
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
@@ -327,11 +344,11 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
-      {/* ASCII Wave Background */}
+    <section id="home" className="relative min-h-screen flex items-center justify-center bg-black">
+      {/* ASCII Wave Background - fixed to cover entire page */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 z-0"
+        className="fixed inset-0 z-0 pointer-events-none"
         aria-hidden="true"
         role="presentation"
       />
@@ -387,17 +404,10 @@ export default function Hero() {
             </Link>
             <span className="text-gray-700">|</span>
             <button
-              onClick={() => {
-                const event = new KeyboardEvent('keydown', {
-                  key: 'k',
-                  metaKey: true,
-                  bubbles: true,
-                });
-                document.dispatchEvent(event);
-              }}
+              onClick={() => openCommandPalette(true)}
               className="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-2"
             >
-              <kbd className="text-xs">⌘K</kbd>
+              <kbd className="text-xs">{modKey}K</kbd>
             </button>
           </div>
         </div>

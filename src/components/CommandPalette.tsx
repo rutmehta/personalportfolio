@@ -1,6 +1,26 @@
 'use client';
-import { useEffect, useState, useCallback } from 'react';
+import { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import { Command } from 'cmdk';
+
+const CommandPaletteContext = createContext<{
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  modKey: string;
+}>({ open: false, setOpen: () => {}, modKey: '⌘' });
+
+export function useCommandPalette() {
+  return useContext(CommandPaletteContext);
+}
+
+function useModifierKey() {
+  const [modKey, setModKey] = useState('⌘');
+  useEffect(() => {
+    const isMac = navigator.platform?.toUpperCase().includes('MAC') ||
+      navigator.userAgent?.toUpperCase().includes('MAC');
+    setModKey(isMac ? '⌘' : 'Ctrl');
+  }, []);
+  return modKey;
+}
 
 const sections = [
   { name: 'Home', href: '#home', shortcut: 'H' },
@@ -23,14 +43,15 @@ const actions = [
   { name: 'Copy Email', action: 'email' },
 ];
 
-export default function CommandPalette() {
+export function CommandPaletteProvider({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
+  const modKey = useModifierKey();
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
-        setOpen((open) => !open);
+        setOpen((prev) => !prev);
       }
       if (e.key === 'Escape') {
         setOpen(false);
@@ -41,10 +62,19 @@ export default function CommandPalette() {
     return () => document.removeEventListener('keydown', down);
   }, []);
 
+  return (
+    <CommandPaletteContext.Provider value={{ open, setOpen, modKey }}>
+      {children}
+    </CommandPaletteContext.Provider>
+  );
+}
+
+export default function CommandPalette() {
+  const { open, setOpen } = useCommandPalette();
+
   const handleSelect = useCallback((value: string) => {
     setOpen(false);
 
-    // Handle section navigation
     const section = sections.find(s => s.name.toLowerCase() === value);
     if (section) {
       if (section.href.startsWith('/')) {
@@ -56,7 +86,6 @@ export default function CommandPalette() {
       return;
     }
 
-    // Handle external links
     const link = links.find(l => l.name.toLowerCase() === value);
     if (link) {
       window.open(link.href, '_blank');
@@ -66,7 +95,7 @@ export default function CommandPalette() {
     if (value === 'copy email') {
       navigator.clipboard.writeText('rutmehta222@gmail.com');
     }
-  }, []);
+  }, [setOpen]);
 
   if (!open) return null;
 
@@ -131,29 +160,16 @@ export default function CommandPalette() {
   );
 }
 
-// Trigger button component
 export function CommandPaletteTrigger() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
+  const { setOpen, modKey } = useCommandPalette();
 
   return (
     <button
-      onClick={() => {
-        const event = new KeyboardEvent('keydown', {
-          key: 'k',
-          metaKey: true,
-        });
-        document.dispatchEvent(event);
-      }}
+      onClick={() => setOpen(true)}
       className="flex items-center gap-2 px-3 py-1.5 text-sm text-gray-500 hover:text-gray-300 border border-gray-800 hover:border-gray-700 rounded-lg transition-colors"
     >
       <span>Search</span>
-      <kbd className="hidden sm:inline-flex">⌘K</kbd>
+      <kbd className="hidden sm:inline-flex">{modKey}K</kbd>
     </button>
   );
 }
