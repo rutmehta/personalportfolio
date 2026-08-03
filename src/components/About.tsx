@@ -57,7 +57,7 @@ const experience: ExperienceItem[] = [
     company: 'Endex.ai',
     role: 'Member of Technical Staff — AI',
     period: 'Feb 2026 – Present',
-    description: 'Spearheading AI at Endex. Building fully autonomous AI analysts.',
+    description: 'AI and product at Endex.ai. Agent R&D, product development and innovation, and agent evals. Building fully autonomous AI analysts and coworkers.',
     link: 'https://endex.ai',
   },
   {
@@ -162,7 +162,7 @@ export default function About() {
               from AI-powered browsers to experiential learning platforms.
             </p>
             <p className="text-gray-400 leading-relaxed">
-              Currently leading AI at Endex.ai. Focused on expanding human intelligence and
+              AI and product at Endex.ai. Focused on expanding human intelligence and
               building tools that reduce friction in how we work.
             </p>
           </div>
