@@ -1,6 +1,27 @@
 'use client';
-import { useState, useRef, useEffect } from 'react';
+
+import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
+
+type ProjectImage = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+};
+
+type ProjectMedia = {
+  /** Primary image or poster. Omit for a media-only video. */
+  image?: ProjectImage;
+  /** Optional muted, looping product demo. It only plays while this region is visible. */
+  video?: string;
+  /** Optional poster for the video; falls back to image.src. */
+  poster?: string;
+  /** Description for the media region and video alternative. */
+  alt: string;
+  gallery?: ProjectImage[];
+};
 
 type Project = {
   title: string;
@@ -12,6 +33,8 @@ type Project = {
   link?: string;
   /** Optional availability note, e.g. "Open source" or "In development". */
   status?: string;
+  /** Optional real product media; projects without it remain text-only. */
+  media?: ProjectMedia;
 };
 
 const projects: Project[] = [
@@ -24,6 +47,37 @@ const projects: Project[] = [
     featured: true,
     status: 'Open source',
     link: 'https://github.com/rutmehta/Atoll',
+    media: {
+      image: {
+        src: '/media/projects/atoll/home.webp',
+        alt: 'Atoll notch hub home view with controls for connected agent sessions.',
+        width: 1520,
+        height: 920,
+      },
+      video: '/media/projects/atoll/demo.webm',
+      poster: '/media/projects/atoll/home.webp',
+      alt: 'Atoll macOS notch hub demonstrating agent activity and approval controls.',
+      gallery: [
+        {
+          src: '/media/projects/atoll/agents-view.webp',
+          alt: 'Atoll notch showing active Claude Code and Codex agent sessions.',
+          width: 1520,
+          height: 920,
+        },
+        {
+          src: '/media/projects/atoll/approval-card.webp',
+          alt: 'Atoll tool approval card inside the notch.',
+          width: 1520,
+          height: 920,
+        },
+        {
+          src: '/media/projects/atoll/shelf.webp',
+          alt: 'Atoll shelf showing saved notch content.',
+          width: 1520,
+          height: 920,
+        },
+      ],
+    },
   },
   {
     title: 'Lenscap',
@@ -34,6 +88,29 @@ const projects: Project[] = [
     featured: true,
     status: 'Open source',
     link: 'https://github.com/rutmehta/Lenscap',
+    media: {
+      image: {
+        src: '/media/projects/lenscap/menu-bar-panel.webp',
+        alt: 'Lenscap compact menu-bar panel with capture and recording actions.',
+        width: 696,
+        height: 968,
+      },
+      alt: 'Lenscap menu-bar panel, capture selection overlay, and quick-access controls.',
+      gallery: [
+        {
+          src: '/media/projects/lenscap/capture-selection.webp',
+          alt: 'Lenscap capture selection overlay with crosshair, rectangle, and size label.',
+          width: 1800,
+          height: 1120,
+        },
+        {
+          src: '/media/projects/lenscap/quick-access.webp',
+          alt: 'Lenscap quick-access overlay for a captured screenshot.',
+          width: 592,
+          height: 426,
+        },
+      ],
+    },
   },
   {
     title: 'Prism',
@@ -54,8 +131,7 @@ const projects: Project[] = [
   },
   {
     title: 'Better Keyboard',
-    description:
-      'iOS keyboard with SHARK2 swipe typing and on-device AI via Apple Foundation Models.',
+    description: 'iOS keyboard with SHARK2 swipe typing and on-device AI via Apple Foundation Models.',
     tags: ['Swift', 'iOS', 'AI'],
     year: '2026',
     link: 'https://github.com/rutmehta/better-keyboard',
@@ -92,6 +168,103 @@ const projects: Project[] = [
   },
 ];
 
+function ProjectMediaView({ media }: { media: ProjectMedia }) {
+  const mediaRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const updateMotionPreference = () => setReduceMotion(mediaQuery.matches);
+
+    updateMotionPreference();
+    mediaQuery.addEventListener('change', updateMotionPreference);
+
+    return () => mediaQuery.removeEventListener('change', updateMotionPreference);
+  }, []);
+
+  useEffect(() => {
+    const element = mediaRef.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { rootMargin: '160px 0px', threshold: 0.01 }
+    );
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (isVisible && !reduceMotion) {
+      void video.play().catch(() => undefined);
+    } else {
+      video.pause();
+    }
+  }, [isVisible, reduceMotion]);
+
+  const primaryImage = media.image;
+  const poster = media.poster ?? primaryImage?.src;
+
+  return (
+    <figure ref={mediaRef} className="mt-8" aria-label={media.alt}>
+      <div className="grid gap-2 md:grid-cols-[minmax(0,1.45fr)_minmax(0,0.75fr)]">
+        <div className="relative aspect-[16/9] overflow-hidden rounded-sm border border-gray-900 bg-[#0a0a0a]">
+          {media.video ? (
+            <video
+              ref={videoRef}
+              className="h-full w-full object-contain"
+              src={media.video}
+              poster={poster}
+              muted
+              loop
+              playsInline
+              preload={isVisible && !reduceMotion ? 'metadata' : 'none'}
+              aria-label={media.alt}
+            />
+          ) : primaryImage ? (
+            <Image
+              src={primaryImage.src}
+              alt={primaryImage.alt}
+              width={primaryImage.width}
+              height={primaryImage.height}
+              sizes="(max-width: 768px) 100vw, 65vw"
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-contain"
+            />
+          ) : null}
+        </div>
+
+        {media.gallery && media.gallery.length > 0 && (
+          <div className="grid grid-cols-2 gap-2 content-start md:grid-cols-2">
+            {media.gallery.map(image => (
+              <div
+                key={image.src}
+                className="relative aspect-[16/9] overflow-hidden rounded-sm border border-gray-900 bg-[#0a0a0a]"
+              >
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  width={image.width}
+                  height={image.height}
+                  sizes="(max-width: 768px) 50vw, 18vw"
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-contain"
+                />
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </figure>
+  );
+}
+
 function ProjectCard({ project, index, inView }: { project: Project; index: number; inView: boolean }) {
   const transitionStyle = { transitionDelay: `${index * 100}ms` };
 
@@ -120,7 +293,7 @@ function ProjectCard({ project, index, inView }: { project: Project; index: numb
     <>
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex-1">
-          <div className="flex items-center gap-4 mb-2">
+          <div className="flex items-center gap-4 mb-2 flex-wrap">
             <h3 className="text-lg md:text-xl font-medium text-white transition-colors group-hover:text-gray-300">
               {project.title}
             </h3>
@@ -145,6 +318,8 @@ function ProjectCard({ project, index, inView }: { project: Project; index: numb
           {expandArrow}
         </div>
       </div>
+
+      {project.media && <ProjectMediaView media={project.media} />}
     </>
   );
 
@@ -163,9 +338,9 @@ function ProjectCard({ project, index, inView }: { project: Project; index: numb
   }
 
   return (
-    <div style={transitionStyle} className={`group ${baseClasses}`}>
+    <article style={transitionStyle} className={`group ${baseClasses}`}>
       {content}
-    </div>
+    </article>
   );
 }
 
@@ -213,9 +388,7 @@ export default function Projects() {
         {/* Projects List */}
         <div className="space-y-px bg-gray-900">
           {displayedProjects.map((project, index) => (
-            <div key={project.title} className={project.link ? 'contents' : undefined}>
-              <ProjectCard project={project} index={index} inView={inView} />
-            </div>
+            <ProjectCard key={project.title} project={project} index={index} inView={inView} />
           ))}
         </div>
 
