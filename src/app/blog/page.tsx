@@ -2,7 +2,29 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
-const posts = [
+type Post = {
+  title: string;
+  description: string;
+  date: string;
+  url: string;
+  tags: string[];
+};
+
+const posts: Post[] = [
+  {
+    title: 'Testing Jev',
+    description: 'A model that cannot write text, tested on GPQA Diamond, MMMLU, the LSAT, calibration, invented rules, search and chess.',
+    date: '2026-09-25',
+    url: '/blog/testing-jev',
+    tags: ['AI', 'Evals'],
+  },
+  {
+    title: 'A browser agent built on Jev',
+    description: 'Jev picks every click. Offline Mind2Web from 7.3% to 50.7%, then 300 live Online-Mind2Web tasks.',
+    date: '2026-09-25',
+    url: '/blog/jev-browser-agent',
+    tags: ['AI', 'Agents', 'Evals'],
+  },
   {
     title: 'Building AI Agents That Actually Work',
     description: 'Practical insights on browser automation, RAG systems, and shipping production AI.',
@@ -56,8 +78,7 @@ export default function BlogPage() {
               {post.url ? (
                 <Link
                   href={post.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  {...(post.url.startsWith('/') ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
                   className="block"
                 >
                   <PostContent post={post} />
@@ -81,15 +102,16 @@ export default function BlogPage() {
   );
 }
 
-function PostContent({ post }: { post: typeof posts[0] }) {
+function PostContent({ post }: { post: Post }) {
   return (
     <>
       <div className="flex items-center gap-4 mb-3">
         <span className="text-gray-500 text-sm font-mono">
-          {new Date(post.date).toLocaleDateString('en-US', {
+          {new Date(post.date + 'T12:00:00Z').toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'short',
-            day: 'numeric'
+            day: 'numeric',
+            timeZone: 'UTC',
           })}
         </span>
         <div className="flex gap-2">
